@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>明白思想体系全解 · 星球编号 20</title>
+<style>
+:root{
+  --bg:#f6f7f9; --paper:#ffffff; --ink:#1e2430; --ink2:#4a5568; --ink3:#7b8494;
+  --line:#e6e9ee; --brand:#2c5c8f; --brand2:#3b7ea1; --accent:#c0703a;
+  --soft:#eef3f8; --soft2:#f8fafd; --gold:#b8860b;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);
+ font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+ font-size:15.5px;line-height:1.85;-webkit-font-smoothing:antialiased}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+
+.sidebar{position:fixed;left:0;top:0;bottom:0;width:288px;background:var(--paper);
+ border-right:1px solid var(--line);display:flex;flex-direction:column;z-index:20}
+.side-head{padding:22px 22px 14px;border-bottom:1px solid var(--line)}
+.side-head .kicker{font-size:11px;letter-spacing:.18em;color:var(--accent);font-weight:700}
+.side-head h1{font-size:17px;margin:7px 0 3px;line-height:1.4;font-weight:700}
+.side-head .sub{font-size:12px;color:var(--ink3)}
+.toc-search{margin:12px 18px 8px;padding:8px 11px;border:1px solid var(--line);border-radius:8px;
+ font-size:12.5px;width:calc(100% - 36px);outline:none;background:var(--soft2);color:var(--ink)}
+.toc-search:focus{border-color:var(--brand2)}
+.toc{flex:1;overflow-y:auto;padding:6px 12px 26px}
+.toc a{display:block;padding:5px 10px;border-radius:6px;color:var(--ink2);font-size:12.8px;
+ line-height:1.5;border-left:2px solid transparent;transition:.15s}
+.toc a:hover{background:var(--soft);text-decoration:none}
+.toc a.toc-l1{font-weight:700;color:var(--ink);margin-top:10px;font-size:13.4px;
+ border-left-color:var(--brand);background:var(--soft2)}
+.toc a.toc-l2{padding-left:22px;font-size:12.4px;color:var(--ink2)}
+.toc a.active{background:#e4eef7;color:var(--brand);font-weight:600}
+.side-foot{padding:12px 20px;border-top:1px solid var(--line);font-size:11px;color:var(--ink3)}
+
+.main{margin-left:288px;padding:0 0 90px}
+.hero{background:linear-gradient(135deg,#2c5c8f 0%,#3b7ea1 55%,#5a9aa8 100%);
+ color:#fff;padding:64px 56px 54px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-90px;top:-90px;width:340px;height:340px;
+ border:1px solid rgba(255,255,255,.18);border-radius:50%}
+.hero:before{content:"";position:absolute;right:10px;bottom:-160px;width:300px;height:300px;
+ border:1px solid rgba(255,255,255,.12);border-radius:50%}
+.hero .kicker{font-size:12px;letter-spacing:.24em;opacity:.82;font-weight:600}
+.hero h1{font-size:38px;line-height:1.28;margin:14px 0 10px;font-weight:800;letter-spacing:.01em}
+.hero .desc{font-size:15px;opacity:.9;max-width:720px;line-height:1.8}
+.hero .stats{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap;position:relative;z-index:2}
+.hero .stat{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);
+ border-radius:10px;padding:12px 18px;min-width:112px;backdrop-filter:blur(4px)}
+.hero .stat b{display:block;font-size:23px;line-height:1.2;font-weight:800}
+.hero .stat span{font-size:11.5px;opacity:.85}
+
+.paper{max-width:940px;margin:-26px auto 0;background:var(--paper);border:1px solid var(--line);
+ border-radius:14px;padding:18px 58px 70px;box-shadow:0 12px 34px rgba(30,40,60,.07);position:relative;z-index:3}
+.paper h1{font-size:27px;margin:52px 0 20px;padding:0 0 12px;border-bottom:2px solid var(--brand);
+ color:var(--ink);font-weight:800;letter-spacing:.01em;scroll-margin-top:20px}
+.paper > h1:first-child{display:none}
+.paper h2{font-size:20.5px;margin:38px 0 14px;padding-left:13px;border-left:4px solid var(--accent);
+ font-weight:700;scroll-margin-top:20px;color:var(--ink)}
+.paper h3{font-size:17px;margin:28px 0 10px;font-weight:700;color:var(--brand);scroll-margin-top:20px}
+.paper h4{font-size:15.5px;margin:22px 0 8px;font-weight:700;scroll-margin-top:20px}
+.paper p{margin:12px 0;color:var(--ink2)}
+.paper strong{color:var(--ink);font-weight:700}
+.paper em{color:var(--ink3)}
+.paper ul,.paper ol{padding-left:24px;margin:12px 0}
+.paper li{margin:6px 0;color:var(--ink2)}
+.paper li::marker{color:var(--brand2)}
+.paper blockquote{margin:18px 0;padding:14px 20px;background:var(--soft2);
+ border-left:4px solid var(--brand2);border-radius:0 8px 8px 0;color:var(--ink2);
+ font-size:15px;line-height:1.8}
+.paper hr{border:0;border-top:1px solid var(--line);margin:34px 0}
+.paper code{background:#f0f2f6;color:#b0483a;padding:1px 5px;border-radius:4px;font-size:13px;
+ font-family:Consolas,"SF Mono",monospace}
+.paper pre{background:#1f2733;color:#e6edf3;padding:16px 20px;border-radius:9px;overflow-x:auto;
+ line-height:1.7;margin:18px 0}
+.paper pre code{background:none;color:inherit;padding:0;font-size:13px}
+.paper a.ref{display:inline-block;background:var(--soft);color:var(--brand);border:1px solid #d8e4f0;
+ border-radius:4px;padding:0 4px;font-size:11.5px;line-height:1.5;vertical-align:1px;
+ font-weight:600;text-decoration:none;margin:0 1px}
+.paper a.ref:hover{background:var(--brand);color:#fff}
+.table-wrap{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:9px}
+.paper table{border-collapse:collapse;width:100%;font-size:13.5px;background:#fff}
+.paper th{background:var(--soft);color:var(--ink);font-weight:700;text-align:left;
+ padding:10px 13px;border-bottom:1px solid var(--line);white-space:nowrap}
+.paper td{padding:9px 13px;border-bottom:1px solid #f0f2f5;color:var(--ink2);vertical-align:top}
+.paper tr:last-child td{border-bottom:0}
+.paper tbody tr:hover{background:#f9fbfd}
+.paper tr:target{background:#fff5e8}
+.paper td:first-child{white-space:nowrap}
+.paper table a{font-weight:500}
+
+.topbtn{position:fixed;right:26px;bottom:26px;width:42px;height:42px;border-radius:50%;
+ background:var(--brand);color:#fff;border:0;cursor:pointer;font-size:18px;
+ box-shadow:0 6px 18px rgba(44,92,143,.3);display:none;z-index:30}
+.progress{position:fixed;top:0;left:288px;right:0;height:3px;background:transparent;z-index:40}
+.progress i{display:block;height:100%;background:var(--accent);width:0}
+
+@media (max-width:1000px){
+ .sidebar{display:none}
+ .main{margin-left:0}
+ .hero{padding:44px 24px 46px}
+ .hero h1{font-size:29px}
+ .paper{margin:-18px 14px 0;padding:16px 22px 50px;border-radius:12px}
+ .progress{left:0}
+}
+@media print{
+ .sidebar,.topbtn,.progress,.toc-search{display:none}
+ .main{margin:0}.paper{box-shadow:none;border:0;max-width:100%}
+ .hero{background:#2c5c8f !important;-webkit-print-color-adjust:exact}
+}
+</style></head><body>
+<div class="progress"><i></i></div>
+<aside class="sidebar">
+ <div class="side-head">
+  <div class="kicker">DEEP READING · 2026</div>
+  <h1>明白思想体系全解</h1>
+  <div class="sub">生财有术 · 星球编号 20 · 全 77 篇</div>
+ </div>
+ <input class="toc-search" placeholder="筛选目录…">
+ <nav class="toc"><a class="toc-l2" href="#卷首-阅读说明与数据口径">卷首 · 阅读说明与数据口径</a>
+<a class="toc-l1" href="#第一编-这个人是谁">第一编　这个人是谁</a>
+<a class="toc-l2" href="#1-1-三个塑造性力量">1.1 三个塑造性力量</a>
+<a class="toc-l2" href="#1-2-生平时间线">1.2 生平时间线</a>
+<a class="toc-l2" href="#1-3-性格底色与转变">1.3 性格底色与转变</a>
+<a class="toc-l2" href="#1-4-贵人谱系">1.4 贵人谱系</a>
+<a class="toc-l2" href="#1-5-他怎么定位自己">1.5 他怎么定位自己</a>
+<a class="toc-l2" href="#1-6-思想演化三阶段与内在张力">1.6 ★ 思想演化三阶段与内在张力</a>
+<a class="toc-l1" href="#第二编-底层公理-9-条第一性原理">第二编　底层公理：9 条第一性原理</a>
+<a class="toc-l1" href="#第三编-认知操作系统-他怎么想问题">第三编　认知操作系统：他怎么想问题</a>
+<a class="toc-l2" href="#3-1-系统拆解-分而治之-每次只改进一个点-11">3.1 系统拆解：分而治之，每次只改进一个点</a>
+<a class="toc-l2" href="#3-2-因果四问-拆掉-我本能觉得对-的判断-13">3.2 因果四问：拆掉「我本能觉得对」的判断</a>
+<a class="toc-l2" href="#3-3-多问为什么-从干货里提炼原理-15-1-18">3.3 多问为什么：从干货里提炼原理</a>
+<a class="toc-l2" href="#3-4-归纳-演绎-学任何一个知识只做两个动作-30">3.4 归纳 + 演绎：学任何一个知识只做两个动作</a>
+<a class="toc-l2" href="#3-5-旧元素-新组合-三个角度迁移-8">3.5 旧元素 + 新组合：三个角度迁移</a>
+<a class="toc-l2" href="#3-6-四清单-把案例沉淀成可调用的兵器库-32">3.6 四清单：把案例沉淀成可调用的兵器库</a>
+<a class="toc-l2" href="#3-7-写下来才能思考-工作记忆只有-4-个信息块-18">3.7 写下来才能思考：工作记忆只有 4 个信息块</a>
+<a class="toc-l2" href="#3-8-最核心因素思维-17">3.8 最核心因素思维</a>
+<a class="toc-l2" href="#3-9-达克效应三阶段-不要让认知超过能力-9">3.9 达克效应三阶段：不要让认知超过能力</a>
+<a class="toc-l2" href="#3-10-其余关键判断">3.10 其余关键判断</a>
+<a class="toc-l2" href="#3-11-思维模型速查表">3.11 思维模型速查表</a>
+<a class="toc-l1" href="#第四编-成长修炼系统-他怎么练">第四编　成长修炼系统：他怎么练</a>
+<a class="toc-l2" href="#4-1-刻意练习-把简单拳法练-1000-遍-20-13">4.1 刻意练习：把简单拳法练 1000 遍</a>
+<a class="toc-l2" href="#4-2-知行合一的完整解法-破惯性-6">4.2 ★ 知行合一的完整解法：破惯性</a>
+<a class="toc-l2" href="#4-3-五条-夸张标语-与为什么必须夸张-6">4.3 五条「夸张标语」与为什么必须夸张</a>
+<a class="toc-l2" href="#4-4-复利与内在正反馈-16-7">4.4 复利与内在正反馈</a>
+<a class="toc-l2" href="#4-5-借外部的事-练自己的功-14-23">4.5 借外部的事，练自己的功</a>
+<a class="toc-l2" href="#4-6-执行意图与动力工程-23-24">4.6 执行意图与动力工程</a>
+<a class="toc-l2" href="#4-7-日更的制度设计-20-17">4.7 日更的制度设计</a>
+<a class="toc-l2" href="#4-8-最底层赚钱能力清单-13-19-14">4.8 最底层赚钱能力清单</a>
+<a class="toc-l2" href="#4-9-从-0-到-1-培养赚钱思维-开眼-复制-贯通-42">4.9 从 0 到 1 培养赚钱思维：开眼 → 复制 → 贯通</a>
+<a class="toc-l1" href="#第五编-写作系统-他的核心载体">第五编　写作系统：他的核心载体</a>
+<a class="toc-l2" href="#5-1-写作与赚钱的-4-个关系-19-全站最高阅读-37067">5.1 写作与赚钱的 4 个关系 （全站最高阅读 37067）</a>
+<a class="toc-l2" href="#5-2-为什么写作短期赚不到钱-预期管理-19">5.2 为什么写作短期赚不到钱：预期管理</a>
+<a class="toc-l2" href="#5-3-写自己-信任的来源与个人-IP-的定义-17">5.3 「写自己」：信任的来源与个人 IP 的定义</a>
+<a class="toc-l2" href="#5-4-写作是手段-思考是目的-18-20">5.4 写作是手段，思考是目的</a>
+<a class="toc-l2" href="#5-5-日更的商业闭环-20-17">5.5 日更的商业闭环</a>
+<a class="toc-l2" href="#5-6-可复用-SOP-宣传一个产品的-4-种写法-17">5.6 可复用 SOP：宣传一个产品的 4 种写法</a>
+<a class="toc-l1" href="#第六编-产品与商业方法论">第六编　产品与商业方法论</a>
+<a class="toc-l2" href="#6-1-四象限-需求-流量-营销-变现-31-32">6.1 四象限：需求 / 流量 / 营销 / 变现</a>
+<a class="toc-l2" href="#6-2-用户需要-用户会买-购买理由与传递感知-31">6.2 用户需要 ≠ 用户会买：购买理由与传递感知</a>
+<a class="toc-l2" href="#6-3-数据是需求的抽象化-5-步市场分析-SOP-35">6.3 ★ 数据是需求的抽象化：5 步市场分析 SOP</a>
+<a class="toc-l2" href="#6-4-MVP-精益创业-破局点-三级火箭">6.4 MVP / 精益创业 / 破局点 / 三级火箭</a>
+<a class="toc-l2" href="#6-5-信息整合-一个可复用-低门槛的成熟商业模式-37">6.5 信息整合：一个可复用、低门槛的成熟商业模式</a>
+<a class="toc-l2" href="#6-6-降低用户认知成本-命名-超级符号-品牌重复-36">6.6 降低用户认知成本：命名、超级符号、品牌重复</a>
+<a class="toc-l2" href="#6-7-能力圈与技能树-为什么先打通一个领域-38">6.7 能力圈与技能树：为什么先打通一个领域</a>
+<a class="toc-l2" href="#6-8-案例拆解四清单-what-why-how-to-32">6.8 案例拆解四清单（what / why / how to）</a>
+<a class="toc-l2" href="#6-9-黄金圈法则与-landing-page-66">6.9 黄金圈法则与 landing page</a>
+<a class="toc-l2" href="#6-10-定价-分销与-让出利益换流量-48-76-41">6.10 定价、分销与「让出利益换流量」</a>
+<a class="toc-l1" href="#第七编-流量与增长实操库-早期-术-的完整档案">第七编　流量与增长实操库（早期「术」的完整档案）</a>
+<a class="toc-l2" href="#7-1-借别人的流量-5-步复制-SOP-39">7.1 借别人的流量：5 步复制 SOP</a>
+<a class="toc-l2" href="#7-2-SEO-与站群-26-43-44">7.2 SEO 与站群</a>
+<a class="toc-l2" href="#7-3-裂变-分销与活动运营-48-76-45-41-65">7.3 裂变、分销与活动运营</a>
+<a class="toc-l2" href="#7-4-信息差-47-58-72-43">7.4 信息差</a>
+<a class="toc-l2" href="#7-5-线下流量-53-46-63">7.5 线下流量</a>
+<a class="toc-l2" href="#7-6-平台差与内容再加工-40-66">7.6 平台差与内容再加工</a>
+<a class="toc-l2" href="#7-7-工具链清单">7.7 工具链清单</a>
+<a class="toc-l2" href="#7-8-增长心法-10-条-跨帖归纳">7.8 增长心法 10 条（跨帖归纳）</a>
+<a class="toc-l1" href="#第八编-能量-情绪与健康系统">第八编　能量、情绪与健康系统</a>
+<a class="toc-l2" href="#8-1-能力-vs-能量-20">8.1 能力 vs 能量</a>
+<a class="toc-l2" href="#8-2-情绪调节方法与完整书单-20-6-22-29-33">8.2 情绪调节方法与完整书单</a>
+<a class="toc-l2" href="#8-3-恶性循环-良性循环-希望的机制-20-29">8.3 恶性循环 → 良性循环：希望的机制</a>
+<a class="toc-l2" href="#8-4-强直性脊柱炎的完整自我管理方案-20-33-4">8.4 强直性脊柱炎的完整自我管理方案</a>
+<a class="toc-l2" href="#8-5-为什么这套系统在他的体系里是-地基-而非-附录">8.5 为什么这套系统在他的体系里是「地基」而非「附录」</a>
+<a class="toc-l1" href="#第九编-2025-新变量-AI-与元认知-1">第九编　2025 新变量：AI 与元认知</a>
+<a class="toc-l2" href="#9-1-Gemini-4-小时做出-APP-完整复盘">9.1 Gemini 4 小时做出 APP 完整复盘</a>
+<a class="toc-l2" href="#9-2-真正的转折不是工具-是元认知">9.2 真正的转折不是工具，是元认知</a>
+<a class="toc-l2" href="#9-3-与他一贯体系的呼应">9.3 与他一贯体系的呼应</a>
+<a class="toc-l1" href="#第十编-事业与产品化-日新月异俱乐部-20-17-18">第十编　事业与产品化：日新月异俱乐部</a>
+<a class="toc-l2" href="#10-1-三次关键咨询">10.1 三次关键咨询</a>
+<a class="toc-l2" href="#10-2-写作社群为什么让他难受-20">10.2 写作社群为什么让他难受</a>
+<a class="toc-l2" href="#10-3-草莓事件与产品定型-20-18">10.3 草莓事件与产品定型</a>
+<a class="toc-l2" href="#10-4-合伙人-产品体系与价值观-20">10.4 合伙人、产品体系与价值观</a>
+<a class="toc-l1" href="#第十一编-工具箱-速查">第十一编　工具箱（速查）</a>
+<a class="toc-l2" href="#11-1-全部-SOP-索引">11.1 全部 SOP 索引</a>
+<a class="toc-l2" href="#11-2-书单-影视-概念速查">11.2 书单 / 影视 / 概念速查</a>
+<a class="toc-l2" href="#11-3-原话金句库-逐字引用">11.3 原话金句库（逐字引用）</a>
+<a class="toc-l2" href="#11-4-避坑清单-跨帖归纳">11.4 避坑清单（跨帖归纳）</a>
+<a class="toc-l2" href="#11-5-30-天实践路线-整理者推导-非作者原话">11.5 30 天实践路线（★ 整理者推导，非作者原话）</a>
+<a class="toc-l1" href="#附录">附录</a>
+<a class="toc-l2" href="#附录-A-77-篇帖子全索引">附录 A　77 篇帖子全索引</a>
+<a class="toc-l2" href="#附录-B-数字口径与核实说明">附录 B　数字口径与核实说明</a>
+<a class="toc-l2" href="#附录-C-原帖全文存档说明">附录 C　原帖全文存档说明</a>
+<a class="toc-l2" href="#附录-D-三条阅读路径">附录 D　三条阅读路径</a></nav>
+ <div class="side-foot">基于全部 77 篇原帖深度阅读整理<br>原话与数字均可回溯核查</div>
+</aside>
+<main class="main">
+ <header class="hero">
+  <div class="kicker">ONE PERSON · ONE SYSTEM</div>
+  <h1>读通「明白」这个人</h1>
+  <div class="desc">从卧床三年的程序员，到日更 1600 天的写作者，再到把「能力是因，赚钱是果」产品化的创业者。
+  本手册对其全部 77 篇星球帖逐篇深读，重构人物、公理、认知方法、修炼系统、写作体系、产品方法论、实操库与能量系统。</div>
+  <div class="stats">
+   <div class="stat"><b>77</b><span>篇原帖全文</span></div>
+   <div class="stat"><b>30</b><span>篇精华</span></div>
+   <div class="stat"><b>9</b><span>条底层公理</span></div>
+   <div class="stat"><b>30</b><span>套可复用 SOP</span></div>
+   <div class="stat"><b>8+</b><span>年思想跨度</span></div>
+  </div>
+ </header>
+ <article class="paper">
+<h1 id="明白思想体系全解">明白思想体系全解</h1>
+<p><strong>读通一个人：生财有术「明白（晚9点半睡觉）」，星球编号 20</strong></p>
+<blockquote>基于该账号公开发布的 <strong>全部 77 篇星球帖</strong>（2017-05-25 — 2025-10-22）逐篇深度阅读后的结构化重构。<br>覆盖：人物生平与性格、底层信念、认知方法、成长系统、写作体系、产品与商业方法论、流量实操库、情绪与健康系统、AI 新变量、事业产品化，以及可速查的 SOP／模型／金句／避坑工具箱。<br>整理时间：2026-11-10</blockquote>
+<hr>
+<h2 id="卷首-阅读说明与数据口径">卷首 · 阅读说明与数据口径</h2>
+<h3 id="这份手册怎么来的">这份手册怎么来的</h3>
+<ol><li>通过站内接口按星球编号 20 拉取该账号全部帖子清单，共 <strong>77 篇</strong>（<code>total=77</code>），按发帖时间倒序翻完 8 页。</li><li>对 77 篇逐篇调用帖子详情，正文优先取 <strong>飞书合并全文</strong>（<code>articleContentContainFeishuDoc</code>）——多数长文的星球正文只是引言，完整内容在飞书文档里；无飞书全文时用原帖正文。</li><li>全部原文落盘到 <code>01-原帖全文/</code>，共 8 个文件、约 690 KB，可逐字核查。</li><li>逐篇做结构化提炼（论点／概念／步骤／数据／原话／主题／体量），再跨篇归纳成体系。</li></ol>
+<h3 id="关于这个人的基础数据-接口实测">关于这个人的基础数据（接口实测）</h3>
+<div class="table-wrap"><table><thead><tr><th>项目</th><th>数值</th></tr></thead><tbody><tr><td>昵称</td><td>明白（晚9点半睡觉）</td></tr><tr><td>星球编号</td><td>20</td></tr><tr><td>生财用户 ID</td><td>42924</td></tr><tr><td>身份标签</td><td>航海家</td></tr><tr><td>粉丝</td><td>296</td></tr><tr><td>发帖数（主页统计口径）</td><td>81</td></tr><tr><td>精华帖数（主页统计口径）</td><td>30</td></tr><tr><td>本次实际取到帖子</td><td>77</td></tr><tr><td>获赞＋投锚总数</td><td>9527</td></tr><tr><td>简介</td><td>明白</td></tr><tr><td>最高互动单帖</td><td><a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a>《身体残疾卧床 3 年…》1455 赞 / 287 评论 / 42 人赞赏</td></tr></tbody></table></div>
+<blockquote><strong>口径提示</strong>：主页统计 81 篇、列表检索 77 篇，两者不一致，通常是问答／作业等类型未进入列表检索（列表工具会主动排除 solution 类内容）。本手册以<strong>实际可读取全文的 77 篇</strong>为范围，不臆补未取到的内容。</blockquote>
+<h3 id="一分钟速览">一分钟速览</h3>
+<p>他是陕西农村出身的普通二本程序员，17 岁确诊强直性脊柱炎，2016 年病情恶化卧床三年、无收入、借钱治病、办了残疾证。2017 年花 365 元加入生财有术，从「完全看不懂案例」开始，靠做《不用写代码的爬虫课》赚到第一桶金，靠知识星球分销网站做到每月 1 万被动收入。2020 年 5 月 28 日开始日更公众号，写了 1600 多天；2021 年 418 靠 100 篇预热文章一夜邀请 468 人、变现约 20 万。2023 年后把整套方法收敛成一个判断：<strong>能力是因，赚钱是果</strong>，转而做「日新月异俱乐部」，专做写作、思考、沟通、销售这些「重要不紧急的基本功」。2025 年 10 月用 Gemini 4 小时做出一个 APP，把「愿力 &gt; 业力 &gt; 能力」写进自己的体系。</p>
+<p>他的全部思想可以压成一句话：<strong>不要追项目、追方法、追干货，去追能力的积累；把一件简单正确的事用足够多的次数练成惯性，钱、信任、影响力都是这条路上自然长出来的副产品。</strong></p>
+<hr>
+
+<h1 id="第一编-这个人是谁">第一编　这个人是谁</h1>
+<h2 id="1-1-三个塑造性力量">1.1 三个塑造性力量</h2>
+<p>理解明白，绕不开三件事。他自己也是这么复盘的：</p>
+<p><strong>① 疾病（强直性脊柱炎）</strong>。初一起膝盖疼，高二确诊，医生说「无法治愈，只能控制」。它给了他三样东西：长期疼痛带来的情绪内耗、被视作「不正常」的深度自卑、以及「我没有退路」的极致紧迫感。2016–2019 年卧床三年，每天一大半时间躺着，拄棍走路，上厕所都要提前 2–3 小时吃止痛药；家里为他治病几乎花光积蓄并借钱；村里长辈带他去办了残疾证。这段经历后来变成他整套「能量 &gt; 能力」判断的经验来源——<strong>他不是从书上读到情绪会影响赚钱，是从身体里熬出来的</strong>。</p>
+<p><strong>② 生财有术（2017，编号 20）</strong>。他在李笑来《通往财富自由之路》和全栈营里完成认知启蒙，又在亦仁《如何找到 1000 个小思路？》里冲动消费 365 元加入星球。第一天是「救命稻草」心态，结果案例全看不懂（SEO、MVP、增长黑客、淘宝客、裂变……），焦虑到「打开生财有术就莫名心跳加快，胸口发闷，索性不看」。后来靠李笑来那四个观念（注意力 &gt; 时间 &gt; 金钱 / 成长是最好的投资 / 付费就是捡便宜 / 一切都是积累）重新回去啃，才慢慢「能看懂这个东西为什么能赚钱」。他反复说：「我在互联网上赚钱的所有知识、技能、思维、经验，朋友、贵人，都是从生财里学到、练会的、认识的。」<a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a></p>
+<p><strong>③ 日更（2020-05-28 起）</strong>。新课《不用写代码的爬虫课》只卖了 200 多份，远低于预期的 1000 份，他归因于「环境变了」——用户不认识他，没有信任。参照 scalers 日更 1000 天、高价社群依然满员的案例，他花一个月想清楚，然后「120% 相信」开始日更。日更后来给他带来三样东西：思考习惯、读者信任、以及变现能力（2021 年 418 一夜 20 万；广告报价从市场均价一个阅读 0.5–1 元直接报到 3 元并有人复投）。</p>
+<h2 id="1-2-生平时间线">1.2 生平时间线</h2>
+<div class="table-wrap"><table><thead><tr><th>时间</th><th>事件</th><th>关键数字</th></tr></thead><tbody><tr><td>高二</td><td>确诊强直性脊柱炎，「无法治愈，只能控制」</td><td>至今 15+ 年</td></tr><tr><td>2009</td><td>入西安邮电大学（测控技术与仪器），大二因病休学一年</td><td>2014 年才毕业</td></tr><tr><td>大学</td><td>300 元报 C 语言培训班；在图书馆立式检索机站着练盲打</td><td>练 3 年</td></tr><tr><td>2014</td><td>北京程序员，第一份工作 6000 元；搬到公司步行 5 分钟处</td><td>半年后跳槽 12000 元，工资翻倍</td></tr><tr><td>2016 端午</td><td>病情加重，独自被老乡带回陕西老家</td><td>卧床约 3 年</td></tr><tr><td>2016–2019</td><td>代课、摆摊 3 次失败、翻译一本书（4 个月，分到 4000 多）；借钱 6 万+ 学全栈营等课程</td><td>全栈营学费 2 万</td></tr><tr><td>2017</td><td>花 365 元加入生财有术，编号 20</td><td>第 1 年 10 帖看不懂 9 个</td></tr><tr><td>2017–2018</td><td>做《不用写代码的爬虫课》，免费送 400 份冷启动；靠课程赚到第一桶金</td><td>2–3 万；课程 1200+ 用户</td></tr><tr><td>2018–2019</td><td>做知识星球分销网站（信息整合 + 百度 SEO）</td><td>稳定期每月被动收入 1 万+，500 UV/天，2023 年停运</td></tr><tr><td>2019 春节后</td><td>执意离家去北京；面试 4–5 家运营岗全被拒（含投亦仁被拒），决定自由职业</td><td>2019 年一整年读书、拆解课程海报</td></tr><tr><td>2020-05-28</td><td>开始日更公众号</td><td>后来 1600+ 天</td></tr><tr><td>2021-04-18</td><td>生财第 4 期拉新，春节起写了约 100 篇预热文章</td><td>邀请 468 人（另说 440+），排名第一，佣金＋龙珠约 20 万</td></tr><tr><td>2021-08</td><td>从北京搬到杭州</td><td>熟人变多，开始线下聚会</td></tr><tr><td>2021–2022</td><td>找根源老师做心理咨询；花 7 颗龙珠（约 7 万）向亦仁咨询；请教涛哥、光合老师</td><td>亦仁否定他列的所有业务</td></tr><tr><td>2022 年底</td><td>陈雪送草莓 → 30 分钟写成带货文</td><td>分销佣金 3000+</td></tr><tr><td>2023</td><td>写作行动营内测做到第 20 期；升级为「日新月异俱乐部」，引入合伙人根源、陈雪</td><td>免费知识星球 6.3 万人</td></tr><tr><td>2025-10</td><td>用 Gemini 4 小时做出《一念一世界》APP</td><td>此前快 10 年没写代码</td></tr></tbody></table></div>
+<h2 id="1-3-性格底色与转变">1.3 性格底色与转变</h2>
+<p><strong>起点</strong>：陕西 8 线县城农村，父母重成绩、少表扬、常比较，他自述「很敏感、自卑、没自信」。因为腿疼不敢告诉父母（「会觉得是我哪里没做好，是我犯了错」），高中主动要求坐最后一排（方便站着活动），抗拒线下见人，怕别人笑话走路姿势。病痛还带来「抑郁 + 暴躁」：会因饭咸、药没熬好摔杯子摔碗，家人说话小心翼翼，妈妈偷偷哭过很多次。</p>
+<p><strong>转折机制</strong>，他自己总结得很清楚：</p>
+<ul><li><strong>谷底思维</strong>：「一个人软弱到极致的时候，也是你的力量最容易积蓄的时候……我已经跌到谷底了，不可能再跌得更惨。这时候，所有的东西都是积累。」→「那我还怕什么呢？置之死地而后生，说的就是我！」</li><li><strong>接受自己</strong>：根源老师建议他换掉「正常卡通头像」，把身体状况放到能被人看见的地方；他的解读是「我愿意把之前觉得很自卑、很不想让别人知道的事情放在头像上，就代表我接受自己」。根源那句「那这个很厉害啊，你这辈子，只能向前看」是典型的处理方式。</li><li><strong>习惯化</strong>：「所有的事情没有不会，不擅长，只有不习惯。做的多了，就擅长了，习惯了。」于是去健身房请私教（每周 3–4 次）、去线下夜话尝试发言（「心跳砰砰跳，紧张到脸红，但我还是去做了」）。</li></ul>
+<p><strong>终点状态</strong>：从「遇到一点小事就焦虑不安」到「无论发生多大的事情，都可以很从容的面对」；从内向自卑到外向自信；每天情绪波动很少。他把这归功于对情绪的<strong>系统性研究</strong>（生理、大脑、心理、神经、哲学五个角度）+ 健康习惯 + 希望。</p>
+<h2 id="1-4-贵人谱系">1.4 贵人谱系</h2>
+<p>他极度强调「贵人」，且每次都具体到人和事，这是他的叙事特征：</p>
+<div class="table-wrap"><table><thead><tr><th>人</th><th>给了什么</th></tr></thead><tbody><tr><td>亦仁</td><td>生财有术；帮他推荐爬虫课；3 年前的帖子启发分销网站；「日新月异俱乐部」这个名字；7 龙珠咨询推翻他全部业务假设，给出「带用户每天坚持做一件事」</td></tr><tr><td>boyzcl</td><td>易灵微课产品经理，接住他的爬虫课；本科医药背景，建议他去西安三甲医院找主任、先网上付费诊断「混脸熟」加号 → 生物制剂，疼痛减轻 70%，身体转机</td></tr><tr><td>根源老师</td><td>心理咨询师，后成合伙人；头像、健身房、线下聚会三条建议；线下 9 年销售管理、2 万+ 咨询案例，线上第一年变现 220 万；「人与人之间的相处是不会变的」</td></tr><tr><td>涛哥</td><td>「当前最优解」：不要指望凭现在的认知想清楚能做 10 年的模式；「让写作的归写作，让赚钱的归赚钱」</td></tr><tr><td>光合老师</td><td>「你有没有清楚，你未来想成为什么样的人？」——以终为始</td></tr><tr><td>李笑来</td><td>《通往财富自由之路》四个观念、开始写作、新生大学、全栈营</td></tr><tr><td>曹大 / 条形马 / scalers / 吴建 / 陈雪 / 聪哥 / 大周哥</td><td>易灵微课平台、侵权咨询、日更范本、短视频思路、合伙人、公益助残、介绍根源</td></tr></tbody></table></div>
+<h2 id="1-5-他怎么定位自己">1.5 他怎么定位自己</h2>
+<ul><li>「我不喜欢做和『项目』相关的事情，我更喜欢做和『人』相关的事情。」<a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a></li><li>让他有成就感的是：如何把一个问题思考得更清楚 / 如何让一个人更有自信、能量 / 如何提升一个人的能力 / 如何打造复利收入系统；让他没成就感的是：找赚钱项目、做爆款、涨粉。</li><li>「我自己经历的原因，我做每一件事，都是站在人生角度思考，而不是当下的利益。」</li><li>作息即身份：「晚9点半睡觉」被写进昵称；早期短帖只有四个字「早睡早起」<a class="ref" href="#post-27" title="跳转到附录 A 第 27 篇">[27]</a>；「天大地大，吃饭最大」<a class="ref" href="#post-2" title="跳转到附录 A 第 2 篇">[2]</a>。</li><li>写作风格：长文（单篇常 8000 字，自传 4 万字）、大量自问自答、反复列举「小明」式的读者提问、飞书文档外链、结尾常附历史精华帖合集小尾巴、微信「mingbai62」。</li></ul>
+<h2 id="1-6-思想演化三阶段与内在张力">1.6 ★ 思想演化三阶段与内在张力</h2>
+<p>这是<strong>吃透他最需要看清的一层</strong>，也是单纯按时间读帖最容易忽略的：</p>
+<div class="table-wrap"><table><thead><tr><th></th><th>早期（2017–2019）</th><th>中期（2020–2022）</th><th>成熟（2023–2025）</th></tr></thead><tbody><tr><td>关注对象</td><td>项目、流量、工具、案例</td><td>写作、思考、能力</td><td>人、基本功、体系</td></tr><tr><td>典型词</td><td>SEO、裂变、被动收入、精准粉、MVP、信息整合</td><td>日更、复利、用户视角、原理、刻意练习</td><td>能力是因、能量、惯性、知行合一、日新月异</td></tr><tr><td>代表帖</td><td><a class="ref" href="#post-35" title="跳转到附录 A 第 35 篇">[35]</a><a class="ref" href="#post-37" title="跳转到附录 A 第 37 篇">[37]</a><a class="ref" href="#post-39" title="跳转到附录 A 第 39 篇">[39]</a><a class="ref" href="#post-41" title="跳转到附录 A 第 41 篇">[41]</a><a class="ref" href="#post-48" title="跳转到附录 A 第 48 篇">[48]</a><a class="ref" href="#post-50" title="跳转到附录 A 第 50 篇">[50]</a><a class="ref" href="#post-76" title="跳转到附录 A 第 76 篇">[76]</a></td><td><a class="ref" href="#post-17" title="跳转到附录 A 第 17 篇">[17]</a><a class="ref" href="#post-19" title="跳转到附录 A 第 19 篇">[19]</a><a class="ref" href="#post-26" title="跳转到附录 A 第 26 篇">[26]</a><a class="ref" href="#post-30" title="跳转到附录 A 第 30 篇">[30]</a><a class="ref" href="#post-42" title="跳转到附录 A 第 42 篇">[42]</a></td><td><a class="ref" href="#post-1" title="跳转到附录 A 第 1 篇">[1]</a><a class="ref" href="#post-5" title="跳转到附录 A 第 5 篇">[5]</a><a class="ref" href="#post-6" title="跳转到附录 A 第 6 篇">[6]</a><a class="ref" href="#post-7" title="跳转到附录 A 第 7 篇">[7]</a><a class="ref" href="#post-11" title="跳转到附录 A 第 11 篇">[11]</a><a class="ref" href="#post-13" title="跳转到附录 A 第 13 篇">[13]</a><a class="ref" href="#post-15" title="跳转到附录 A 第 15 篇">[15]</a><a class="ref" href="#post-16" title="跳转到附录 A 第 16 篇">[16]</a><a class="ref" href="#post-18" title="跳转到附录 A 第 18 篇">[18]</a></td></tr><tr><td>变现观</td><td>找到模式 → 复制 → 放大</td><td>写作练能力 → 信任 → 变现</td><td>能力提升 → 赚钱自然发生</td></tr></tbody></table></div>
+<p><strong>三处值得留意的张力</strong>（不要抹平，它们本身就是线索）：</p>
+<ol><li><strong>早期写「可复制、零门槛、被动收入」，后期写「照着做就能赚钱的干货不存在」</strong>。前者是 2017–2019 的实操帖（如 <a class="ref" href="#post-39" title="跳转到附录 A 第 39 篇">[39]</a> 借流量 5 步、<a class="ref" href="#post-48" title="跳转到附录 A 第 48 篇">[48]</a> 9.9 分销、<a class="ref" href="#post-50" title="跳转到附录 A 第 50 篇">[50]</a> 抓 250 万微信号），后者是 2024 年的 <a class="ref" href="#post-15" title="跳转到附录 A 第 15 篇">[15]</a><a class="ref" href="#post-18" title="跳转到附录 A 第 18 篇">[18]</a>。不是自相矛盾，而是他从「卖打法」转向了「卖能力」——他自己也承认创业方向是「稀里糊涂过了大半年」才想通的。</li><li><strong>他一边说「不喜欢做和项目相关的事」，一边留着 40 多篇项目拆解</strong>。这恰好说明他的能力是<strong>从项目里练出来的</strong>，只是热情后来迁移到了「人」。</li><li><strong>他反复批判「追求方法」，自己却是清单／SOP／标语的高产作者</strong>。区别在于：他批判的是「以为照抄步骤就有结果」，提倡的是「把原理练成惯性」。理解这点，整套体系才不打架。</li></ol>
+<blockquote><strong>判断</strong>：他不是天生「长期主义者」，是被疾病、失败和长期无正反馈逼出来的。所有反速成、反干货、反追风口的话，都有 2016–2019 那三年做后盾。这也是他讲道理时不空的原因。</blockquote>
+<hr>
+
+<h1 id="第二编-底层公理-9-条第一性原理">第二编　底层公理：9 条第一性原理</h1>
+<p>这 9 条是他全部文章的「公理层」，后面所有方法、SOP、案例都是它们的推论。每条给出命题、原话、出处、推论与边界。</p>
+<h3 id="A1-赚钱是结果-不是事件-是复杂系统">A1　赚钱是结果，不是事件，是复杂系统</h3>
+<ul><li><strong>原话</strong>：「赚钱是结果，是做某件事情的结果。」<a class="ref" href="#post-10" title="跳转到附录 A 第 10 篇">[10]</a>；「我对赚钱的认识，从一个独立的简单事件，变成一个复杂的系统。」<a class="ref" href="#post-11" title="跳转到附录 A 第 11 篇">[11]</a></li><li><strong>错误的模型</strong>：找到项目 → 照固定教程执行 → 拿到结果。</li><li><strong>他的模型</strong>：找到项目 → 拆出 X 个环节 → 每个环节大量实践 Y 次直到熟练 → 把 X 个熟练环节组合起来再实践 Z 次 → 拿到结果。X、Y、Z 都不确定，因人而异。</li><li><strong>推论</strong>：分而治之、每次只改进一个点；不要问「哪个项目赚钱」，要问「做成这件事需要哪些能力」。</li><li><strong>边界</strong>：这条否定的不是「项目」，是「单点归因」。他早期照样做项目，只是不再把成败押在某个教程上。</li></ul>
+<h3 id="A2-能力是因-赚钱是果">A2　能力是因，赚钱是果</h3>
+<ul><li><strong>原话</strong>：「赚钱的第一性原理：一个人能赚钱，本质上是因为他创造了价值，而创造价值的核心是能力。」<a class="ref" href="#post-10" title="跳转到附录 A 第 10 篇">[10]</a>；「能力是因，赚钱是果。」<a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a></li><li><strong>两问自检</strong>：做成这件事的人有什么能力与资源，我全都有吗？这件事的影响因素有哪些，我能全部解决吗？「如果这 2 件事情都想不清楚，也研究不出来，那说明基本功不过关，大概率就做不好。」</li><li><strong>推论</strong>：能分享出来的信息只是赚钱链条的一部分，「那些没法分享出来的叫能力」；写作与赚钱只是相关性，不是因果性（中间「还有 99 环」）。</li><li><strong>这是他从「项目思维」转向「成长社群」的分水岭</strong>：日新月异俱乐部明确只做「提升能力／认知」，不做「带人赚钱」。</li></ul>
+<h3 id="A3-一切都是积累-复利-慢就是快">A3　一切都是积累 / 复利 / 慢就是快</h3>
+<ul><li><strong>原话</strong>：「复利效应是客观事实，它对每个人都是绝对公平。」<a class="ref" href="#post-7" title="跳转到附录 A 第 7 篇">[7]</a>；「一切都是积累。慢就是快。」<a class="ref" href="#post-10" title="跳转到附录 A 第 10 篇">[10]</a>；「成长，从来都是靠『积累』，而不是靠『方法、技巧』。」<a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a></li><li><strong>三个层次</strong>：知识的复利（N 个知识可产生 N²−1 个联结）、能力的复利（同一套基本功迁移到不同项目）、收入的复利（前期接近 0，到拐点后急剧增长）。</li><li><strong>判断标准</strong>：「如果一件事不能让自己得到成长，就说明它没有复利效应。」</li><li><strong>推论</strong>：看精华帖／参加航海，别问「能不能马上变现」，问它加深了什么：行业了解、流量理解、需求洞察、平台机制、商业模式认知。</li><li><strong>边界</strong>：复利不等于「什么都不用做地等」，它的前提是「用正确的方法，做正确的事情」并且<strong>持续</strong>。</li></ul>
+<h3 id="A4-刻意练习的次数决定一切-天赋可以被创造">A4　刻意练习的次数决定一切，天赋可以被创造</h3>
+<ul><li><strong>原话</strong>：「一个人能不能做好一件事，只和一个因素有关，就是 —— 他在这件事上，刻意练习的时间、次数。」<a class="ref" href="#post-13" title="跳转到附录 A 第 13 篇">[13]</a>；「换句话说，你的『天赋』是可以创造出来的。」</li><li><strong>反的是</strong>：优势／天赋／热爱／「适合自己」与做成一件事之间的因果想象。他用「因果四问」逐层拆掉这个本能判断（见第三编）。</li><li><strong>推论</strong>：选择标准从「我喜不喜欢」改成「做好这件事能不能让我人生变得更好」；写作、沟通、销售、情绪控制都可以练成「天赋」。</li><li><strong>他的自证</strong>：2016–2019 年身体最差、每天能用的时间和精力「比群里每个人都更少」，照样靠重复练出了写作、做课、营销、产品。</li></ul>
+<h3 id="A5-道胜于术-原理共通-方法无常">A5　道胜于术：原理共通，方法无常</h3>
+<ul><li><strong>原话</strong>：「方法在不断变化，属于海市蜃楼。追求方法，就像在追逐镜中花、水中月。」<a class="ref" href="#post-14" title="跳转到附录 A 第 14 篇">[14]</a>；「搞懂原理，就是了解事物的底层逻辑，我们就能一通百通。」<a class="ref" href="#post-15" title="跳转到附录 A 第 15 篇">[15]</a></li><li><strong>三分法</strong>：任何领域分「知识 / 方法 / 原理」三层；知识与方法的行业差异极大，<strong>原理共通</strong>。</li><li><strong>「有效 vs 无效」而非「难 vs 简单」</strong>：追求原理困难、复杂、要延迟满足，但有效；追求干货简单、有即时反馈，但无效。「不是 100 和 1 的问题，而是 100 和 0 的问题。」</li><li><strong>推论</strong>：「要选择正确的难受」；「如果你不会游泳，怎么换游泳池都没用」。</li><li><strong>边界</strong>：这是他 2024 年的立场，与他 2017–2019 年大量产出「打法帖」构成前述张力。</li></ul>
+<h3 id="A6-能量-能力-身心是地基">A6　能量 &gt; 能力：身心是地基</h3>
+<ul><li><strong>原话</strong>：「能量比能力更重要。」<a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a>；「成长过程中，90% 的问题……核心原因，不是方法、技巧、方向，而是心理因素，或者说情绪问题。」</li><li><strong>定义</strong>：能力 = 知识技能（帮你做成事）；能量 = 体力、心情、状态。能量不足 → 无法静心学习行动 → 能力不会持续提高 → 收入不会持续提高。</li><li><strong>推论</strong>：修心、锻炼、饮食、早睡不是「生活调剂」，是赚钱系统的前置模块；「每天锻炼 1 小时，一年多赚 20 万」不是鸡汤而是逻辑 <a class="ref" href="#post-4" title="跳转到附录 A 第 4 篇">[4]</a>。</li><li><strong>经验来源</strong>：情绪波动 → 第二天腿更疼 → 心情更差 → 能量更低，这个恶性循环他亲身跑了 15 年。</li></ul>
+<h3 id="A7-需求决定价值-用户视角是经验-不是技巧">A7　需求决定价值：用户视角是经验，不是技巧</h3>
+<ul><li><strong>原话</strong>：「『用户视角』不是方法、技巧、技能，而是经验、是了解、是『有意识』观察的积累。」<a class="ref" href="#post-33" title="跳转到附录 A 第 33 篇">[33]</a><a class="ref" href="#post-19" title="跳转到附录 A 第 19 篇">[19]</a>；「产品有价值」和「用户能感知到产品价值」是完全不同的两回事 <a class="ref" href="#post-19" title="跳转到附录 A 第 19 篇">[19]</a><a class="ref" href="#post-31" title="跳转到附录 A 第 31 篇">[31]</a>。</li><li><strong>推论</strong>：先创意「购买理由」再开发产品（华与华）；「用户需要」是「用户会买」的必要条件，不是充分条件 <a class="ref" href="#post-31" title="跳转到附录 A 第 31 篇">[31]</a>；数据是需求的抽象化 <a class="ref" href="#post-35" title="跳转到附录 A 第 35 篇">[35]</a>。</li><li><strong>培养方式</strong>：有意识观察 N 个用户 → 得到 N 个用户视角 → N 越大越强；「用户的每一个问题，都是我积累『用户视角』的一个机会」<a class="ref" href="#post-33" title="跳转到附录 A 第 33 篇">[33]</a>。</li></ul>
+<h3 id="A8-成长靠积累-不靠方法技巧">A8　成长靠积累，不靠方法技巧</h3>
+<ul><li><strong>原话</strong>：「一看就会，一做就废。」<a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a>；「听了那么多道理，依然过不好这一生。知道那么多方法，依然做不成事情。」</li><li><strong>幻觉来源</strong>：互联网让任何方法都能搜到，于是产生「我掌握了很多方法，我现在很厉害了」的错觉。即便简单到「因为所以」这个思维模型，也要刻意练习几十、几百遍才用得出来。</li><li><strong>推论</strong>：「把简单有用的拳法，练习 1000 遍」；「三年见成效的事，做出来就领先三年」；「时间的力量，必须靠时间来拉平」。</li></ul>
+<h3 id="A9-希望-课题分离-专注自己的课题">A9　希望：课题分离，专注自己的课题</h3>
+<ul><li><strong>原话</strong>：「别人赚钱，是别人的课题。你没赚钱，是你的课题。」<a class="ref" href="#post-29" title="跳转到附录 A 第 29 篇">[29]</a>；「最好的正反馈，从不来自外界，而是在自身。」<a class="ref" href="#post-16" title="跳转到附录 A 第 16 篇">[16]</a></li><li><strong>定义</strong>：希望 = 相信自己的明天会因为今天的努力而变好；重点是<strong>明天不会自动变好</strong>，是因为今天用正确的方式做了正确的事。</li><li><strong>推论</strong>：盲目对比是痛苦的最大根源之一；用阿德勒课题分离处理「七夕蛤蟆」式热点焦虑；「现在是过去的积累，未来是现在的积累」。</li><li><strong>这是他整套体系的情绪底座</strong>：<a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a> 结尾把能站起来归因于「心里有一颗希望的种子，一直没有熄灭」。</li></ul>
+<hr>
+
+<h1 id="第三编-认知操作系统-他怎么想问题">第三编　认知操作系统：他怎么想问题</h1>
+<p>这一编是他所有文章里最可迁移的部分：<strong>一组可复用的思考动作</strong>。他自己称之为「思维模型」，并强调要「练 1000 遍」。</p>
+<h2 id="3-1-系统拆解-分而治之-每次只改进一个点-11">3.1 系统拆解：分而治之，每次只改进一个点 <a class="ref" href="#post-11" title="跳转到附录 A 第 11 篇">[11]</a></h2>
+<p>把一个结果拆成影响因素清单，逐点攻克，最后再组合联调。他用「有效早起」做示范：</p>
+<div class="table-wrap"><table><thead><tr><th>步骤</th><th>动作</th><th>他的估算</th></tr></thead><tbody><tr><td>1</td><td>列出全部影响因素</td><td>时间安排 / 状态调整 / 起床后做什么 / 与全天其他事协调，共 4 个点</td></tr><tr><td>2</td><td>每次只改进一个点</td><td>单点需多次分析、试错、调整，约 5 天做好</td></tr><tr><td>3</td><td>各点组合联调</td><td>4 个点约 20 天，再加组合调试</td></tr><tr><td>4</td><td>得到结果</td><td>「从系统角度真正做好早起最少需要 30 天」</td></tr></tbody></table></div>
+<blockquote>「每次只改进一个点，这样才能更好的，把所有注意力，都放在这个点上，全力做好。」</blockquote>
+<p>换到小红书、公众号、个人 IP、独立开发，路径完全一样。<strong>这条是他 anti-焦虑的核心工具</strong>：「只要路径是对的，给自己一些时间，就一定能获得结果。」</p>
+<h2 id="3-2-因果四问-拆掉-我本能觉得对-的判断-13">3.2 因果四问：拆掉「我本能觉得对」的判断 <a class="ref" href="#post-13" title="跳转到附录 A 第 13 篇">[13]</a></h2>
+<p>面对任何「因为 A 所以 B」的本能判断（例如「要找到喜欢的事才能坚持」），依次问：</p>
+<ol><li>A 真的是 B 的原因吗？</li><li>如果 A 是 B 的原因，A 是 B 的<strong>唯一</strong>原因吗？</li><li>如果 A 不是唯一原因，还有哪些原因？</li><li>如果 A 不是<strong>最重要</strong>原因，最重要的原因到底是什么？</li></ol>
+<p>他用这套问法把「喜欢／天赋／适合自己」从「做成一件事」的因果链上摘掉，换成「刻意练习的时间、次数」。同一个问法在 <a class="ref" href="#post-10" title="跳转到附录 A 第 10 篇">[10]</a> 里用来拆「写作 → 赚钱」：两者只是相关性，中间还有 99 环。</p>
+<h2 id="3-3-多问为什么-从干货里提炼原理-15-1-18">3.3 多问为什么：从干货里提炼原理 <a class="ref" href="#post-15" title="跳转到附录 A 第 15 篇">[15]</a><a class="ref" href="#post-1" title="跳转到附录 A 第 1 篇">[1]</a><a class="ref" href="#post-18" title="跳转到附录 A 第 18 篇">[18]</a></h2>
+<p><strong><a class="ref" href="#post-15" title="跳转到附录 A 第 15 篇">[15]</a> 的三步法</strong>（看到任何赚钱教程里的方法／思路时）：</p>
+<ol><li>这个方法／思路背后的<strong>原理</strong>是什么？为什么它会有效？</li><li>还有哪些产品／案例／现象／事物也在使用它？<strong>找 3–5 个</strong>。</li><li>它如何能用到自己或身边的产品／案例／现象／事物上？<strong>再找 3–5 个</strong>。</li></ol>
+<p>他给的示范：抖音「每天记 30–40 个微信号」的干货，背后原理是<strong>推荐算法</strong>（在有联系方式的视频点赞、多看几遍，抖音就会推更多同类视频）；理解原理后就能改成任何平台、任何钩子形式。反例是「吃苹果四步法」——把每一步的意外列出来（嫌贵、忘带钱、觉得脏、过敏、太硬、被朋友抢了……），说明<strong>不存在一字不差照做就能成功的教程</strong>，因为「这个世界上，没有两个完全相同的人」。</p>
+<p><strong><a class="ref" href="#post-1" title="跳转到附录 A 第 1 篇">[1]</a> 的三类 why</strong>（2025 年与 Gemini 协作时沿用）：为什么要做这件事 / 这个结果为什么会出现 / 为什么你会给出这个建议。并配一句：「一知半解很可怕。」</p>
+<p><strong><a class="ref" href="#post-18" title="跳转到附录 A 第 18 篇">[18]</a> 的最小动作</strong>：遇到任何问题或事情，<strong>至少问自己 2 个「为什么」并回答</strong>；练 1000 遍才能体会到好处。</p>
+<h2 id="3-4-归纳-演绎-学任何一个知识只做两个动作-30">3.4 归纳 + 演绎：学任何一个知识只做两个动作 <a class="ref" href="#post-30" title="跳转到附录 A 第 30 篇">[30]</a></h2>
+<div class="table-wrap"><table><thead><tr><th>动作</th><th>具体操作</th><th>检验标准</th></tr></thead><tbody><tr><td>归纳</td><td>看身边还有哪些产品／案例／现象也在用这个知识；去精华站搜关键词，对比、研究、分析不同和优劣</td><td>「找不到，说明下的功夫不够大。那就继续找，直到找出来为止」</td></tr><tr><td>演绎</td><td>想这个知识如何用到自己或身边的事物上（「用到我的课程上，改进一下呢」）</td><td>同样要求 100% 找到落点</td></tr></tbody></table></div>
+<p><strong>为什么</strong>：在大脑和知识之间刺激新的神经突触、建立链接，遇到问题能下意识自动跳出来。「想不起来，那这个知识就和没学一样。」</p>
+<h2 id="3-5-旧元素-新组合-三个角度迁移-8">3.5 旧元素 + 新组合：三个角度迁移 <a class="ref" href="#post-8" title="跳转到附录 A 第 8 篇">[8]</a></h2>
+<ul><li>理论支点：万维钢「喜欢 = 熟悉 + 意外」、熊彼特「创新 = 旧元素 + 新组合」、乔布斯「把不同的事物关联起来」（iPhone = iPod + Phone + Internet）。</li><li><strong>三个迁移角度</strong>（他注明参考亦仁）：<strong>用户 / 场景 / 需求</strong>。</li><li>具体示范：</li><li><strong>换用户</strong>：爬虫课从程序员 → 运营（搜集热点做活动）/ 产品（整理用户反馈）/ 设计（下载图片）。</li><li><strong>换场景</strong>：抽出「根据某个因素变化让价格变动」这条原理 → 卖衣服（剩 100 件 100 元 / 50 件 120 元 / 10 件 200 元）→ 生财社群（每满 100 人涨 100 元）→ 课程（销量增加涨价）→ 运营活动（人数增加、门槛提高）。</li><li><strong>换需求</strong>：把「七夕孤寡蛤蟆」的活动元素拆开，迁移到相似需求（站内有人圣诞节照做也赚了几万）。</li><li>前提：「很多时候，我们不是不会拼，而是没有东西可拼。」所以要多看、勤奋积累元素，否则是无效勤奋。</li><li>收束成两步：① 我有一个东西但不知怎么做得更好；② 看到一个好东西，把优点拆出来和自己组合。</li></ul>
+<h2 id="3-6-四清单-把案例沉淀成可调用的兵器库-32">3.6 四清单：把案例沉淀成可调用的兵器库 <a class="ref" href="#post-32" title="跳转到附录 A 第 32 篇">[32]</a></h2>
+<p>高手「遇到任何事都能快速拓展到赚钱」不是聪明，是「长期刻意练习养成的思维习惯」。做法是每遇一个成功案例，按四个维度各建一份清单，每份用 what / why / how to 三问：</p>
+<div class="table-wrap"><table><thead><tr><th>清单</th><th>what（记什么）</th><th>why（问什么）</th><th>锻炼什么</th></tr></thead><tbody><tr><td>需求清单</td><td>产品如何描述自己</td><td>用马斯洛五层定位底层需求</td><td>赚钱敏感性</td></tr><tr><td>流量清单</td><td>搜产品名看内容营销／SEO／投放；试用产品看增长机制；看行业拆解</td><td>为什么用这种、为什么不用别的、留意「异常值」</td><td>引流能力</td></tr><tr><td>营销清单</td><td>定位角度、卖点、文案、故事</td><td>背后的原理（底层需求一致 → 原理相同）</td><td>用户视角</td></tr><tr><td>变现清单</td><td>卖流量／付费内容服务社群／付费高级功能</td><td>为什么用这种、优势、为什么这个价格</td><td>商业思维</td></tr></tbody></table></div>
+<blockquote>「因为产品在变，人性不变。掌握不变的东西，就能以不变应万变。」<br>「1 个产品，你积累 1 种引流方式……N 个产品，你积累 N 种引流方式。」</blockquote>
+<p>调用方式：遇到新事物，在大脑里「实战演练」一次，从四份清单各取一个相似方案套用。</p>
+<h2 id="3-7-写下来才能思考-工作记忆只有-4-个信息块-18">3.7 写下来才能思考：工作记忆只有 4 个信息块 <a class="ref" href="#post-18" title="跳转到附录 A 第 18 篇">[18]</a></h2>
+<ul><li><strong>生理约束</strong>：大脑工作记忆最多存储 4 个信息块；复杂问题超过 4 个变量就会「脑子不够用」。</li><li><strong>解法</strong>：「外接一个『大脑』：写下来。」每想清楚 4 个点就写到纸上，释放工作记忆，再想第 5 个时直接去纸上看。</li><li><strong>情绪解法</strong>：焦虑时「把你关于焦虑，想到的方方面面，全部写下来」。模糊 → 未知 → 恐惧不安 → 一直占用后台认知资源；写下来就是把它从后台搬到前台。</li><li><strong>写作的定位</strong>：「写作，不是单纯的『拿起键盘打字』，写作更重要的是，帮助我们梳理大脑中，混乱的想法。」</li></ul>
+<h2 id="3-8-最核心因素思维-17">3.8 最核心因素思维 <a class="ref" href="#post-17" title="跳转到附录 A 第 17 篇">[17]</a></h2>
+<p>做事前花大量时间想：「做成这件事的影响因素有哪些？假设有 10 个，哪一个是最核心的？」——这个因素搞定，事情 80% 就成；搞不定，其他 9 个做得再好也没用。把 80% 注意力压上去，「起到事半功 10 倍的效果」。</p>
+<p>他用这个模型复盘「7 年拉新 1100+」：不是日更技巧、不是定位、不是排版，最核心的只有一件事——<strong>写自己</strong>（内容必须自己亲自实践过并拿到结果）。</p>
+<h2 id="3-9-达克效应三阶段-不要让认知超过能力-9">3.9 达克效应三阶段：不要让认知超过能力 <a class="ref" href="#post-9" title="跳转到附录 A 第 9 篇">[9]</a></h2>
+<div class="table-wrap"><table><thead><tr><th>阶段</th><th>状态</th><th>典型情绪</th><th>突破方式</th></tr></thead><tbody><tr><td>1 自负</td><td>「不知道自己不知道」</td><td>嗤之以鼻、觉得别人傻</td><td>跳出信息深井，进能让你「眼前一亮」的圈子</td></tr><tr><td>2 自我怀疑</td><td>「知道自己不知道」</td><td>焦虑、妒忌</td><td>接受情绪并写下来找根源；学习 ↔ 做事反复循环</td></tr><tr><td>3 自信</td><td>「知道自己知道」</td><td>焦虑嫉妒变少</td><td>知识积累 / 认知提升 / 技能熟练 / 成功反馈</td></tr></tbody></table></div>
+<blockquote>「焦虑的本质原因，就是能力跟不上认知，所以提升能力，做出成绩才能真正缓解焦虑。」</blockquote>
+<p>自测方法：翻朋友圈，看自己下意识的反应落在哪一栏。配套「做事 5 原则」：不做的三类（重复性无积累、单次收益无积累、没营养的刷屏），尽早买的两类（提高效率的工具、对成长有帮助的东西）。</p>
+<h2 id="3-10-其余关键判断">3.10 其余关键判断</h2>
+<ul><li><strong>概念要清晰</strong> <a class="ref" href="#post-30" title="跳转到附录 A 第 30 篇">[30]</a>：「概念不清，行动就是模糊的，之后的方法、努力，都会白费。」用「写作／演讲／开店」都有明确动作和操作对象，反证「赚钱」不是一个能被学会的「事情」。</li><li><strong>以终为始</strong> <a class="ref" href="#post-12" title="跳转到附录 A 第 12 篇">[12]</a><a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a>：光合老师那句「你有没有清楚，你未来想成为什么样的人？」；他的落地是「这件事本身就是在赚钱，只是结果会显示在未来」。</li><li><strong>当前最优解</strong> <a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a>：涛哥——「不要指望凭自己的认知、能力就想清楚一个能做 10 年的商业模式。选中一个当下你最能做好的事情，认真去做就好了。」</li><li><strong>模仿高手</strong> <a class="ref" href="#post-30" title="跳转到附录 A 第 30 篇">[30]</a><a class="ref" href="#post-42" title="跳转到附录 A 第 42 篇">[42]</a>：「我跳过自己浅薄的眼光，直接吸收高手的经验，走了捷径。」</li><li><strong>牢记客观世界</strong> <a class="ref" href="#post-33" title="跳转到附录 A 第 33 篇">[33]</a>：《原则》「如果现实和你的理想情况不一致，一定是你的想法出了问题」；<a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a>「如果一件事情的发生和自己的预期不符，那事实一定是对的」。</li></ul>
+<h2 id="3-11-思维模型速查表">3.11 思维模型速查表</h2>
+<div class="table-wrap"><table><thead><tr><th>模型</th><th>一句话</th><th>出处</th></tr></thead><tbody><tr><td>因为……所以……</td><td>强制给出因果，不许含糊</td><td><a class="ref" href="#post-18" title="跳转到附录 A 第 18 篇">[18]</a></td></tr><tr><td>为什么……</td><td>至少连问 2 个</td><td><a class="ref" href="#post-18" title="跳转到附录 A 第 18 篇">[18]</a></td></tr><tr><td>我如何确定自己是对的？</td><td>把假设摆出来验证</td><td><a class="ref" href="#post-18" title="跳转到附录 A 第 18 篇">[18]</a></td></tr><tr><td>做成这件事的影响因素有哪些？</td><td>拆系统</td><td><a class="ref" href="#post-18" title="跳转到附录 A 第 18 篇">[18]</a><a class="ref" href="#post-11" title="跳转到附录 A 第 11 篇">[11]</a></td></tr><tr><td>同样的需求／模式／方法，迁移到不同平台、用户、场景会有什么创新？</td><td>迁移</td><td><a class="ref" href="#post-18" title="跳转到附录 A 第 18 篇">[18]</a><a class="ref" href="#post-8" title="跳转到附录 A 第 8 篇">[8]</a></td></tr><tr><td>因果四问</td><td>拆伪因果</td><td><a class="ref" href="#post-13" title="跳转到附录 A 第 13 篇">[13]</a></td></tr><tr><td>归纳 + 演绎</td><td>固化知识</td><td><a class="ref" href="#post-30" title="跳转到附录 A 第 30 篇">[30]</a></td></tr><tr><td>what / why / how to</td><td>拆案例</td><td><a class="ref" href="#post-32" title="跳转到附录 A 第 32 篇">[32]</a></td></tr><tr><td>需求 / 流量 / 营销 / 变现</td><td>拆生意</td><td><a class="ref" href="#post-31" title="跳转到附录 A 第 31 篇">[31]</a><a class="ref" href="#post-32" title="跳转到附录 A 第 32 篇">[32]</a></td></tr><tr><td>用户 / 场景 / 需求</td><td>举一反三</td><td><a class="ref" href="#post-8" title="跳转到附录 A 第 8 篇">[8]</a></td></tr><tr><td>最核心因素（10 选 1）</td><td>抓主要矛盾</td><td><a class="ref" href="#post-17" title="跳转到附录 A 第 17 篇">[17]</a></td></tr><tr><td>必要 / 充分条件</td><td>「用户需要 ≠ 用户会买」</td><td><a class="ref" href="#post-31" title="跳转到附录 A 第 31 篇">[31]</a></td></tr><tr><td>学习 → 练习 → 实习 → 惯习</td><td>技能养成四段</td><td><a class="ref" href="#post-12" title="跳转到附录 A 第 12 篇">[12]</a></td></tr><tr><td>当前最优解 / 以终为始</td><td>决策</td><td><a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a><a class="ref" href="#post-12" title="跳转到附录 A 第 12 篇">[12]</a></td></tr></tbody></table></div>
+<hr>
+
+<h1 id="第四编-成长修炼系统-他怎么练">第四编　成长修炼系统：他怎么练</h1>
+<p>如果说第三编解决「想清楚」，这一编解决「做得到」。<strong>这是他后期最用力、也最区别于普通商业博主的部分。</strong></p>
+<h2 id="4-1-刻意练习-把简单拳法练-1000-遍-20-13">4.1 刻意练习：把简单拳法练 1000 遍 <a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a><a class="ref" href="#post-13" title="跳转到附录 A 第 13 篇">[13]</a></h2>
+<ul><li>「任何知识、技能，要熟练掌握、运用，都必须经历大量刻意练习。这是一个符合世界规律的第一性原理。」</li><li>引《华与华正道》：「积累是第一生产力，也是第一竞争力，花时间越长的事情，越值得投入、投资去做。三年见成效的事，做出来就领先三年；十年见成效的事，做出来就领先十年。」</li><li>「你多练习 100 天，就比别人领先 100 天。这个 100 天，是靠任何金钱、方法，都没法超越的。」</li><li>他的自证：日更 1600+ 天、免费知识星球从 0 到 6.3 万人、写作行动营做到 20 期。</li></ul>
+<h2 id="4-2-知行合一的完整解法-破惯性-6">4.2 ★ 知行合一的完整解法：破惯性 <a class="ref" href="#post-6" title="跳转到附录 A 第 6 篇">[6]</a></h2>
+<p>这是全站最能代表他后期方法论的一篇（近 8000 字）。<strong>他认为「明明知道但做不到」的罪魁祸首不是意志力，是惯性。</strong></p>
+<p><strong>诊断</strong>：焦虑时想不起用「解离」，是因为旧行为模式已存在近 30 年，惯性太大；新的正确方法只学过一次，力量几乎为 0。</p>
+<p><strong>完整 SOP</strong>：</p>
+<ol><li><strong>识别惯性类型</strong>：行为惯性 / 情绪惯性 / 思维惯性（借《正念的奇迹》）。他形容旧惯性像「自行车下坡」，要「按多次刹车」才能匀速、随时想停就停。</li><li><strong>把方法打印出来贴在眼前</strong>：「每看到一次，就加深一次好惯性的力量」，他自述看了几百次。</li><li><strong>高频复习，逐步拉长间隔</strong>：早期每 <strong>5 分钟</strong>复习一次解离方法，随练习次数增加逐步拉长。他给的「好惯性持续时长递增曲线」：5 分钟 → 10 分钟 → 30 分钟 → 1 小时 → 5 小时 → 1 天 → 3 天 → 10 天 → 1 个月 → 3 个月 → 半年 → 1 年。</li><li><strong>改变环境</strong>：环境是更大的惯性，且会传播给下一代。果断屏蔽产生坏惯性的场景（朋友圈、群聊、知识星球），进入好惯性圈子（多看精华帖、多参加航海、多学赚到钱的高手）。</li><li><strong>收尾公式</strong>：在随时能看到的地方贴一张纸，写上想改变的方面（赚钱／工作／生活／沟通／爱情／写作），每天看一次、做一次。</li></ol>
+<blockquote>「不是 1 和 2，或者 1 和 10 的区别。而是 0 和 100 的区别。」（指「学到一个东西」与「学到一个东西并贴在眼前高频去用」）<br>「改变是一个需要每天做、高频做、长期做的事情。」</blockquote>
+<h2 id="4-3-五条-夸张标语-与为什么必须夸张-6">4.3 五条「夸张标语」与为什么必须夸张 <a class="ref" href="#post-6" title="跳转到附录 A 第 6 篇">[6]</a></h2>
+<p>他把赚钱实战里的五条原则逐条打印贴在电脑前，每天看一遍：</p>
+<ol><li>「认真打卡的人，100% 都获得了结果」</li><li>「发够 100 篇笔记／视频，我能赚 100 万」「每发一篇笔记／视频，我能赚 1 万块」</li><li>「把这篇笔记／视频越早发出去，我就离赚 100 万越近一步」</li><li>「模仿成功案例，可以提高 10 倍赚钱效率。自己瞎做，就是无效勤奋，我就是个蠢货，一辈子也赚不到钱」</li><li>「我不能掌控结果，但我能掌控过程。把自己能做的事情，尽最大的努力。但行好事，莫问前程」</li></ol>
+<p><strong>为什么必须写 100%、100 万、一辈子</strong>：保守说法如「99% 能获得结果」会让大脑想「我肯定是 1%，算了，不打卡了」。夸张是为了绕开大脑的讨价还价。配套反例是「小明看励志视频」：第 2 天 5 点起、第 3 天 6 点、第 4 天 7 点、第 5 天 8 点、第 6 天 10 点恢复原样——典型的「一鼓作气，再而衰，三而竭」。</p>
+<blockquote>背景：《正念的奇迹》（樊登读书两个版本，旧版《正念的力量》）他重复听了不下 300 遍。</blockquote>
+<h2 id="4-4-复利与内在正反馈-16-7">4.4 复利与内在正反馈 <a class="ref" href="#post-16" title="跳转到附录 A 第 16 篇">[16]</a><a class="ref" href="#post-7" title="跳转到附录 A 第 7 篇">[7]</a></h2>
+<p><strong>问题</strong>：参加航海「流程都跑通了，但收益很少」，就不想做了。</p>
+<p><strong>诊断</strong>：用上班思维（月 2 万 ≈ 每天近 1000 块）套副业，而副业收入是<strong>不确定的复利曲线</strong>：第 1–3 个月 0，第 4 个月 10，第 5 个月 50，第 6 个月 200，第 7 个月 2000……第 13 个月 10000，第 20 个月 20000。「前期一两个月，甚至半年，甚至一年，没赚到钱，这个太正常了。」</p>
+<p><strong>7 问复盘清单</strong>（每次航海、甚至每天）：我积累了哪些知识？哪些能力变强了？积累了哪些更好的方法？学会了哪些商业模式？学会了哪些没听过的商业思维？情绪管理有没有变好？有没有认识新朋友？</p>
+<p><strong>可量化动作</strong>：「如果你能每天写出在航海活动里，学到哪 5 个东西。一年下来你能积累 1000 多个成长。那第二年你做项目，一定会比第一年提高 3 倍成功概率。」</p>
+<p><strong>把期待换掉的对照表</strong>：</p>
+<div class="table-wrap"><table><thead><tr><th>原来的正反馈（外界）</th><th>换成（内在）</th></tr></thead><tbody><tr><td>写作 → 涨粉、赞赏、高阅读、接广告</td><td>写清楚逼自己查资料深入思考；写情绪看思维盲区；阅读低练耐心；被冷嘲热讽练心性</td></tr><tr><td>读书 → 赚钱</td><td>增长知识、见识</td></tr><tr><td>做项目 → 赚钱</td><td>追问为啥能赚钱、满足什么需求、高手怎么想怎么做</td></tr></tbody></table></div>
+<blockquote>「最好的正反馈，从不来自外界，而是在自身。」（文中出现两次）<br>「因种好了，果自然就会出现。」</blockquote>
+<p><strong>死循环警戒</strong>：没正反馈 → 放弃 → 换下一件 → 每件事浅尝辄止 → 习得性无助。</p>
+<h2 id="4-5-借外部的事-练自己的功-14-23">4.5 借外部的事，练自己的功 <a class="ref" href="#post-14" title="跳转到附录 A 第 14 篇">[14]</a><a class="ref" href="#post-23" title="跳转到附录 A 第 23 篇">[23]</a></h2>
+<p>灵感来自王阳明给高官徒弟的回信：判案不收钱是修炼贪心、说不清还不烦躁是修炼耐心、案情复杂找头绪不烦不沮丧是修炼明辨之心。结论：「生活中无时无刻，任何一个节点，都是你保持修炼的时机。」——所以不必挤碎片时间，「一份时间，发挥多份价值」，比专门找时间学习好 10 倍。</p>
+<p><strong>日常工作 → 能力转化 8 条</strong>：</p>
+<ol><li>碰到任务 → 研究同事／同行怎么做、为什么效果好、自己如何改进 → 研究能力</li><li>每天做同样的事 → 把流程标准化，写成谁都能照做的文档 → 写作、学习、沟通</li><li>遇到不顺很生气 → 情绪处理、换位思考、沟通</li><li>工作学习遇困难很挫败 → 勇敢面对困难、不屈不挠</li><li>学技能一直没成效 → 延迟满足、耐心、以终为始</li><li>看到别人赚钱焦虑嫉妒 → 正念、观察自己、控制情绪</li><li>难题大家都不愿做，你接下来 → 主动性、学习、解决问题</li><li>……「如果你愿意，这个列表可以无穷无尽的写下去」</li></ol>
+<p><strong>他定义的「真正的赚钱能力」</strong>：① 学习能力（不懂的能快速搜索学会）② 研究／逻辑思考能力（遇到问题能快速研究解决）；更底层三个特质：稳定的心、主动性、自我驱动的热情——合称「这 5 个能力」。</p>
+<h2 id="4-6-执行意图与动力工程-23-24">4.6 执行意图与动力工程 <a class="ref" href="#post-23" title="跳转到附录 A 第 23 篇">[23]</a><a class="ref" href="#post-24" title="跳转到附录 A 第 24 篇">[24]</a></h2>
+<p><strong><a class="ref" href="#post-23" title="跳转到附录 A 第 23 篇">[23]</a> 内外两手</strong>（针对「早上到公司进不了状态」）：</p>
+<ul><li>内：把上班想象成「社会大学」——免费试错、还有人发钱；能力提升了赚钱肯定更多（「这也是逻辑，不是鸡汤」）。</li><li>外：用心理学的<strong>执行意图</strong>——「一旦我到了 X 场景，我就要做 Y 事」。提前一天列清单，设定「一旦坐到椅子上，就打开电脑；一旦打开电脑，就开始写文章」；做完打勾；为让打勾更多，把任务拆得更细；加小奖励（喝咖啡、吃巧克力、吃苹果）。依据「大脑最少耗能原则」：「大脑不喜欢你给它问题，大脑喜欢你给它答案。」</li></ul>
+<p><strong><a class="ref" href="#post-24" title="跳转到附录 A 第 24 篇">[24]</a> 执行力 = 两件事</strong>：</p>
+<ol><li>你是否知道<strong>下一步该做什么</strong> → 靠多模仿高手拆解任务，「提高执行力，本质上需要提高的是学习能力」。</li><li>动力是否足够大 → 动力 &gt; 阻力；最高效普适的方法是<strong>想象</strong>，「你想象的越清晰、越强烈、越有色彩，你就会越兴奋」（多巴胺）。家里墙上贴满「写作会带给我的各种好处」。</li><li>工具不重要：「如果实现目标的影响因素有 100 个，工具最多占到 1。」</li></ol>
+<h2 id="4-7-日更的制度设计-20-17">4.7 日更的制度设计 <a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a><a class="ref" href="#post-17" title="跳转到附录 A 第 17 篇">[17]</a></h2>
+<ul><li><strong>决策过程</strong>：花整整一个月想「为什么要日更」，想清楚后「120% 相信，日更这件事，未来会带给我 10 倍 100 倍的收益」，也「120% 相信，不日更的话，我未来会越来越难」。</li><li><strong>起心动念不是为了爆文涨粉</strong>，而是：把学过的、思考过的全部重新内化一遍；自己成长 → 内容变好 → 有人关注转发赞赏 → 接广告／带货变现。他称这是「第一性原理的逻辑」。</li><li><strong>信任的经济学</strong>：知识付费环境已变，「新用户根本不认识我，不了解我，所以没有信任感」；「信任，是未来做知识付费，最重要的一个因素」。日更是「用时间积累出来的信任，非常牢固」。</li><li><strong>量化反馈</strong>：日更 100 篇 → 邀请 480 人 → 变现 20 万 →「一篇文章变现 2000 块钱，一篇 2000 字，就是一个字 1 块钱」。当时墙上贴的是「写一篇文章可以赚 50 万」。</li><li><strong>定价测试</strong>：日更后平均阅读 2000，却把广告报价报到 6000（市场均价一个阅读 0.5–1 元，他直接跳到 3 元），「因为我觉得，我肯定值这个价格」；竟有人同意并多次复投。</li><li><strong>写作内容</strong>：早期只写自己——学到的知识、遇到的问题、情绪、如何解决的。</li></ul>
+<h2 id="4-8-最底层赚钱能力清单-13-19-14">4.8 最底层赚钱能力清单 <a class="ref" href="#post-13" title="跳转到附录 A 第 13 篇">[13]</a><a class="ref" href="#post-19" title="跳转到附录 A 第 19 篇">[19]</a><a class="ref" href="#post-14" title="跳转到附录 A 第 14 篇">[14]</a></h2>
+<div class="table-wrap"><table><thead><tr><th>来源</th><th>清单</th></tr></thead><tbody><tr><td><a class="ref" href="#post-13" title="跳转到附录 A 第 13 篇">[13]</a></td><td>写作（影响力）、逻辑思考（执行力的根源）、学习能力、沟通销售、网感、用户视角、遇到问题解决问题不逃避的特质</td></tr><tr><td><a class="ref" href="#post-19" title="跳转到附录 A 第 19 篇">[19]</a></td><td>学习能力、思考能力、用户视角、传递感知（「赚钱需要的 4 个基础能力」）</td></tr><tr><td><a class="ref" href="#post-14" title="跳转到附录 A 第 14 篇">[14]</a></td><td>学习能力、研究／逻辑思考能力 + 稳定的心、主动性、自我驱动的热情</td></tr><tr><td><a class="ref" href="#post-12" title="跳转到附录 A 第 12 篇">[12]</a></td><td>学习、思考、写作、沟通、销售、产品、营销</td></tr></tbody></table></div>
+<p>他明确：细分能力（文案、引流、数据分析等）都是从这几个基础能力长出来的；「基础能力优秀的人……就像一个变形金刚」；「这 4 种能力都具备复利效应」。而应用层的做课、社群、个人 IP、抖音、小红书、淘宝，都建立在这些基础上。</p>
+<h2 id="4-9-从-0-到-1-培养赚钱思维-开眼-复制-贯通-42">4.9 从 0 到 1 培养赚钱思维：开眼 → 复制 → 贯通 <a class="ref" href="#post-42" title="跳转到附录 A 第 42 篇">[42]</a></h2>
+<ol><li><strong>开眼（多看）</strong>：看足够多案例并深入思考记在脑中；遇新案例时从已有记忆里提取方案。依据 xdite 元学习理论「大脑无法用未知解释未知」「多数的思考并不是真的思考，而是调用过去记忆所组成的结果」。需要<strong>笃信 = 120% 的相信</strong>（被人打击磨掉 20% 还剩 100%）。</li><li><strong>复制（模仿）</strong>：照猫画虎做，因为只看到表面、不懂底层模式，大概率失败，这很正常。</li><li><strong>贯通（改进）</strong>：失败后分两类多问为什么——<strong>没流量</strong>（用户是谁／在哪／怎么找到；对比别人是写文章、SEO、淘宝引流、微信群裂变还是合作分成）／<strong>有流量没付费</strong>（产品、看不懂、价格；对比别人的介绍、价格、文案、免费送的玄机）。循环「失败 → 分析总结改进 → 重来 → 成功」。</li></ol>
+<blockquote>「互联网赚钱无非 2 点：流量 / 转化。」<br>「看案例能否赚钱，还取决于：看时是否会多思考 / 思考后是否会行动 / 行动后是否会分析、总结、改进。」</blockquote>
+<hr>
+
+<h1 id="第五编-写作系统-他的核心载体">第五编　写作系统：他的核心载体</h1>
+<h2 id="5-1-写作与赚钱的-4-个关系-19-全站最高阅读-37067">5.1 写作与赚钱的 4 个关系 <a class="ref" href="#post-19" title="跳转到附录 A 第 19 篇">[19]</a>（全站最高阅读 37067）</h2>
+<p>他的核心论断：<strong>写作短期肯定赚不到钱，但它同时锻炼赚钱最底层的 4 个基础能力</strong>。</p>
+<div class="table-wrap"><table><thead><tr><th>能力</th><th>写作怎么练它</th><th>具体动作</th></tr></thead><tbody><tr><td>学习能力</td><td>写前先读书查资料请教，自己先搞懂才能写明白；写中发现模糊处查漏补缺</td><td>用读者评论／转发／点赞验证是否真学会，再针对性改进</td></tr><tr><td>思考能力</td><td>逐层深入（别人当抱怨，你能看出用户需求 → 能开发成产品 → 能打动付费）</td><td>用李笑来「8 个概念问题」打磨概念</td></tr><tr><td>用户视角</td><td>每篇琢磨「读者愿意看吗／哪些已知／哪些未知／关心什么担心什么／以前怎么解决／看完会有什么疑问／如何表达更好理解」</td><td>再根据留言、赞赏反馈迭代</td></tr><tr><td>传递感知</td><td>把一篇文章当「卖一个产品」；没人反馈 = 没写明白；反馈跑偏 = 写偏了</td><td>不断写、不断按反馈改进</td></tr></tbody></table></div>
+<p><strong>李笑来 8 个概念问题</strong>：我要说的是什么概念？这个概念为什么重要？普遍被如何误解？实际上是怎么回事儿？正解有什么意义？如何正确使用？错误使用有什么可怕之处？与什么其他重要概念有重要联系？</p>
+<p><strong>传递感知的示范</strong>：包子店牌子「A 包子 / B 新鲜包子 / C 猪肉、牛肉、大葱、韭菜，现做现卖」→ 用户更可能买 C。「产品有价值」≠「用户能感知到产品价值」。</p>
+<blockquote>「我从来没见过任何一个学习能力、思考能力、用户视角、传递感知不行的人，就能写出 10w+，有影响力，接广告赚到钱。」</blockquote>
+<h2 id="5-2-为什么写作短期赚不到钱-预期管理-19">5.2 为什么写作短期赚不到钱：预期管理 <a class="ref" href="#post-19" title="跳转到附录 A 第 19 篇">[19]</a></h2>
+<ul><li>破除「写几天、几个月就能涨粉赚钱」的预期（大概率是幸存者偏差）。</li><li>「前面的这些『鸡汤』，是比『干货』重要 10000 倍的东西」——指想清楚「自己为什么而写」。</li><li>写爆文的次序：<strong>第一稿都是枯燥的逻辑、讲理形式</strong>（因为…所以…／由…构成／被…影响／原理是…），第 2、3…N 稿才逐渐加案例、金句、开头、结尾、故事。「不用思考就能看懂」的爆文比烧脑文难度更大；思考不清就套金句故事，「只会让用户觉得稀里糊涂」。</li><li>他的产量变化：从「4、5 个小时憋一篇 1000 字」到「每天 10–30 分钟完成 1000–2000 字」。</li></ul>
+<h2 id="5-3-写自己-信任的来源与个人-IP-的定义-17">5.3 「写自己」：信任的来源与个人 IP 的定义 <a class="ref" href="#post-17" title="跳转到附录 A 第 17 篇">[17]</a></h2>
+<ul><li>「我在写每一篇文章的时候，都有一个原则：写自己。」</li><li>判断只有一条：「我们写的内容，必须自己亲自实践、经历过，并且获得了结果。」没做过的化妆、跑步、做菜，写了就是纸上谈兵，没人会信。</li><li>亦仁给的个人 IP 定义：<strong>不是定一个位去教别人</strong>，而是「你自己这个人／你的知识、思维、能力、经验／你做过什么／你能解决什么问题」；「是真实的人，而非定位、策划出来的『人设』」。</li><li><strong>自嗨的价值</strong>：「我和用户的『嗨点』是一样的（喜怒哀乐、七情六欲）」；前提是「我们要对自己有深刻、清晰、具体的认识、理解、剖析」「我们无法给别人自己没有的东西」；「自嗨 = 悦己，悦己才能持续。持续，就是最伟大的力量」。</li><li>「交易的本质是信任」「经济学第一定律，需求决定价值」。</li></ul>
+<h2 id="5-4-写作是手段-思考是目的-18-20">5.4 写作是手段，思考是目的 <a class="ref" href="#post-18" title="跳转到附录 A 第 18 篇">[18]</a><a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a></h2>
+<ul><li>「从某个角度来说，赚钱就是一个解决问题的过程。每天解决一个赚钱的问题，每天就离赚钱的结果，更近一些。」（亦仁 7 龙珠咨询给他的话）</li><li>「在行动之前，是否还存在一些更重要、甚至更前提的环节」→ 思考。「不是太重要了，而是没有它，赚钱就会变成一件碰运气的事情。」</li><li><strong>草莓案例</strong> <a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a>：陈雪送草莓，聊了会儿天，第二天花 30 分钟写成日更文章《一个姑娘给我送草莓，我发现一个赚钱项目！》，分销佣金 3000 多。他复盘：「为什么我能从一个平常生活聊天中，想到一个话题，然后写成一篇带货文章？」答案是<strong>思考的习惯</strong>——日更 1000 多天让他碰到任何事都会习惯性从各个角度想一遍，再选收益最大的那个角度落地。</li><li>「写作，对我们最重要的帮助是什么？我觉得是：让自己养成思考习惯。」影响力、IP、知识体系、流量、变现「都是一个人成长后，自然而然会出现的东西」。</li><li><strong>道与术</strong>：涨粉、热点、阅读是「术」，逻辑思考能力是「道」；「如果一个人一开始写作，起心动念就是为了这些，他就不太会有耐心去认真锻炼思考习惯」。</li></ul>
+<h2 id="5-5-日更的商业闭环-20-17">5.5 日更的商业闭环 <a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a><a class="ref" href="#post-17" title="跳转到附录 A 第 17 篇">[17]</a></h2>
+<pre><code>写自己 → 内容真实可验证 → 读者全方位认识你 → 信任
+   → 产品推出时用户相信「对我有帮助」 → 付费
+   → 正反馈（广告/带货/分销/自有课程社群） → 更有动力日更</code></pre>
+<ul><li>2021 年 418：从春节起写生财相关文章约 100 篇 → 当晚邀请 468 人、排名第一 → 佣金＋龙珠约 20 万，「在 8 点过了不到 5 分钟，我凭空多出了 20 万」。</li><li>多个产品分销第一：涛哥、曹大、张哥、粥左罗老师的课程。</li><li>变现结构：广告、带货、卖自己的课程／社群、写文章推荐别人产品；自述「变现 7 位数」「赚到第一个 100 万」。</li><li>免费知识星球从 0 到 6.3 万人（起因很朴素：公众号一天只能发一次，星球一天能发多次，需要一个随时输出的环境）。</li></ul>
+<h2 id="5-6-可复用-SOP-宣传一个产品的-4-种写法-17">5.6 可复用 SOP：宣传一个产品的 4 种写法 <a class="ref" href="#post-17" title="跳转到附录 A 第 17 篇">[17]</a></h2>
+<p>前提：<strong>在朋友圈或公众号发文案时，一定要加上自己在产品里的亲身经历、思考、实践</strong>（不一定必须赚到钱，也可以是思维提升、见识提升、参加过一次小航海），再叠加官方海报／案例／素材，「效果会提高至少 3 倍」。四种人人可写的形态：</p>
+<ol><li><strong>参加过一次小航海</strong>：做了哪些事（打卡、发笔记、发视频）／遇到哪些问题怎么解决（或没解决是为什么）／学到哪些东西／获得哪些结果／和之前上班有什么不一样。</li><li><strong>选一篇有启发的精华帖</strong>（带链接）：里面 XX 让我有启发／我发现自己之前是 XX 做的／看完后我 XX 可以改进／为什么要这样改／我相信会有 XX 变化。</li><li><strong>选一个在社群里认识的新朋友／榜样</strong>：怎么认识的／他哪里吸引你／交流后自己在思维、价值观、见识上有哪些改变／这些改变是好是坏、为什么／对未来有哪些不一样的想法。</li><li><strong>认真思考加入后最大的一个变化</strong>：见识提高、思维更开阔、更有动力，<strong>或者更焦虑</strong>——并写「看到自己的焦虑后，你打算做点什么」。「不用担心暴露自己的不好的一面。」</li></ol>
+<blockquote>四条里最重要的仍是「写自己」：一定要结合自己的真实思考、感受、行动、复盘、情绪。</blockquote>
+<hr>
+
+<h1 id="第六编-产品与商业方法论">第六编　产品与商业方法论</h1>
+<p>这一编是他 2019–2021 年密度最高、也最「可操作」的部分。</p>
+<h2 id="6-1-四象限-需求-流量-营销-变现-31-32">6.1 四象限：需求 / 流量 / 营销 / 变现 <a class="ref" href="#post-31" title="跳转到附录 A 第 31 篇">[31]</a><a class="ref" href="#post-32" title="跳转到附录 A 第 32 篇">[32]</a></h2>
+<p>分析一个案例按「需求 → 流量 → 营销 → 变现」顺序拆解；<strong>制定操作计划时必须倒过来，先做营销</strong>：「1 营销 2 需求 3 流量 4 变现」。理由是华与华那句「产品开发，应该是【后工序】决定【前工序】」——先想清楚用户为什么买，再倒推选品、引流、变现。</p>
+<h2 id="6-2-用户需要-用户会买-购买理由与传递感知-31">6.2 用户需要 ≠ 用户会买：购买理由与传递感知 <a class="ref" href="#post-31" title="跳转到附录 A 第 31 篇">[31]</a></h2>
+<ul><li>「『用户需要』是『用户会买』的必要条件，不是充分条件。」</li><li>公式：「用户需要」+「用户购买理由」=「用户会买」；更完整是再加「用户感兴趣」这个引子。</li><li><strong>三种购买理由</strong>：价格低 / 帮用户减少决策成本 / 帮用户发现新商品。</li><li>「产品有价值」是起点，「用户感知到产品价值」是终点，<strong>中间那条路径就是营销</strong>。「营销好坏，决定了用户是否愿意『在人群中看你一眼』。」</li><li>起步动作：「先把预期降低，卖出去第 1 个产品，赚到第 1 块钱，然后再考虑如何改进。」</li><li>反例：农夫山泉 + 勤工俭学大学生 + 锄头——人人都需要，但没人会因为这个理由买。</li></ul>
+<h2 id="6-3-数据是需求的抽象化-5-步市场分析-SOP-35">6.3 ★ 数据是需求的抽象化：5 步市场分析 SOP <a class="ref" href="#post-35" title="跳转到附录 A 第 35 篇">[35]</a></h2>
+<p>他明确反对「朋友圈用户调研」，两个理由：① 小范围、人群相似、思维方式趋同，答者会用「专家视角」回答；② 用户最多思考 3 秒，得到的是「冲动型」答案。反向操作就是<strong>把小范围扩大 + 把冲动型变成思考型</strong>，去 UGC 平台用公开数据反挖。</p>
+<div class="table-wrap"><table><thead><tr><th>步</th><th>动作</th></tr></thead><tbody><tr><td>1 头脑风暴</td><td>列出和「搜索」关联的词语（信息、搜集、资料、效率、赚钱……），即用户想用它达成的目的</td></tr><tr><td>2 从源头拓展</td><td>想不到就搜原始词，从结果里提取「用搜索来做什么、达成什么目的」；1–2 步是为找到「目标词」做冷启动</td></tr><tr><td>3 统计数据</td><td>搜这些目标词，统计帖子的阅读、点赞、评论、关注、付费人数</td></tr><tr><td>4 研究数据结果</td><td>针对高赞帖，看它<strong>如何描述这个点</strong>——「要具体到某句话，某个词，某个场景、某个故事」；把评论里「他对什么有疑问？想达到什么目标？抱怨什么？有没有留联系方式？」全部挨个记录</td></tr><tr><td>5 汇总筛选</td><td>剔除误导信息，「选出最能打动用户的 1（n）个点，按照这几个点，开发产品」</td></tr></tbody></table></div>
+<blockquote>「划重点：不是先开发产品，然后找卖点。」<br>「一句话：想不清楚如何推广的产品，没必要做。」<br>「用户在看到产品，勾起下单欲望的时候，他喜欢的不是这个产品，而是产品描述带给他们的美好感受。」</blockquote>
+<p><strong>平台清单</strong>：内容平台（知乎、豆瓣、贴吧、简书、头条、公众号、抖音／快手／B站）／知识付费平台（千聊、荔枝微课、网易云课堂、腾讯课堂、得到、混沌、喜马拉雅、小鹅通、樊登读书等）／电商平台（淘宝、京东、闲鱼、1688、速卖通、亚马逊、拼多多、小红书，参考月销量／评论数／价格）。</p>
+<p><strong>拓展 100 个思路后三问</strong>：用户能否拓展？场景能否拓展？需求能否拓展？</p>
+<p><strong>提效工具</strong>：八爪鱼、火车头、后羿采集器。「如果有 1000 条数据，别人整理需要 1 小时，你只需要 1 分钟。」</p>
+<h2 id="6-4-MVP-精益创业-破局点-三级火箭">6.4 MVP / 精益创业 / 破局点 / 三级火箭</h2>
+<ul><li><strong>MVP</strong> <a class="ref" href="#post-26" title="跳转到附录 A 第 26 篇">[26]</a><a class="ref" href="#post-33" title="跳转到附录 A 第 33 篇">[33]</a>：先用最低成本验证商业模式是否成立。他的示范是「先在公众号发一篇文章介绍几个星球，验证带来好几百块佣金」，再决定建站；<a class="ref" href="#post-31" title="跳转到附录 A 第 31 篇">[31]</a> 里「一开始用微信群 + 石墨就可以了」。</li><li><strong>精益创业 / 破局点</strong> <a class="ref" href="#post-70" title="跳转到附录 A 第 70 篇">[70]</a>：引《生财小报》「确保有人愿意下载使用之后，再着手把软件做出来」（Dropbox 先放 demo 视频，几十万用户留言后才开发）。他给的四类最低成本验证：做视频 / 写文章 / 调查问卷 / 各类指数（百度、微信、360、爱站），「综合起来结果会更可靠一些」。创业梳理法：把顾虑全列出来 → 一条条砍 → 砍到只剩「没有这个产品根本没法生存」的那一个 → 用最低成本搭真实环境验证。破局点应用：招商家不一家家找，集中资源说服最有影响力的那个，再对别人说「那个谁谁谁已经来了」。</li><li><strong>三级火箭</strong> <a class="ref" href="#post-41" title="跳转到附录 A 第 41 篇">[41]</a>：用高频免费（低价）带动低频付费（高价）（360 免费杀毒→浏览器→广告变现）。迁移到公众号：「用传播度高的文章，带动传播度低的文章，传播度低的文章里面有变现入口」。</li><li><strong>28 定律</strong> <a class="ref" href="#post-34" title="跳转到附录 A 第 34 篇">[34]</a>：20% 的网站能满足用户 80% 的业务需求，所以模板按「类」做而不是按站点做。</li></ul>
+<h2 id="6-5-信息整合-一个可复用-低门槛的成熟商业模式-37">6.5 信息整合：一个可复用、低门槛的成熟商业模式 <a class="ref" href="#post-37" title="跳转到附录 A 第 37 篇">[37]</a></h2>
+<p>定义：「将散落在互联网上，杂乱无章，需要花时间才能看到的信息，整理到一起，提供给用户。」判断：<strong>「只有有信息沉淀的地方，都可能做出一个信息整合的产品」「有人抱怨的地方，就可能做出这么一个产品」</strong>。</p>
+<p><strong>找需求的 4 类源头</strong>：</p>
+<ol><li>围绕大体量产品（微信→新榜、小程序→阿拉丁；可拓展微博、头条、抖音、快手、知乎）</li><li>围绕行业（知识付费、程序员、运营、产品、营销的资料包／导航）——「围绕自己的工作领域，看看自己平时需求搜集什么信息」</li><li>从知乎找需求：搜「哪」「哪些」「哪些 XX」，从高赞回答挖</li><li>从百度知道找需求（同上）</li></ol>
+<p><strong>需求可以很小的 4 个例</strong>：整理微信群分享内容（群主发红包）／整理生财精华帖（亦仁满格赞赏）／整理 50 个公众号文章朋友圈卖 50 块／小程序整理裂变海报「限量查看 XX 张，付费查看更多」。</p>
+<p><strong>载体不设限</strong>：公众号、小程序、知识星球、个人号、甚至一篇文章。「不要局限」。变现：广告、分销、付费服务、培训。</p>
+<p>他真正看重的不是这个模式，而是「能让你从 0 到 1，走完一个产品的全流程：如何挖掘需求、验证真伪、如何推广、如何变现」。</p>
+<p><strong>案例库</strong>（他一次列了 14 组）：hao123（千万卖给百度）、4399、菜鸟教程（1 人研发运营、全球排名 600+）、新榜、阿拉丁、抖大大、toobigdata、币乎榜（日 PV 10w）、捷径社区、今日热榜、大梦想商店、考拉新媒体导航、AMZ123/AMZ520、知识星球精选站 zsxq100.com、iwebscraper.com。</p>
+<h2 id="6-6-降低用户认知成本-命名-超级符号-品牌重复-36">6.6 降低用户认知成本：命名、超级符号、品牌重复 <a class="ref" href="#post-36" title="跳转到附录 A 第 36 篇">[36]</a></h2>
+<ul><li>「产品名字只有一个目的：降低用户认知成本。」</li><li><strong>用户认知成本定义</strong>：用户「从看到这个产品，到发生兴趣，所需要花费的成本（时间、精力、知识、思考、动作（搜索、询问、请教）等等）」。</li><li><strong>方法</strong>：「把名字和熟悉的事物联系起来」——cPanel→「小丁当」（机器猫口袋里的万能工具）、小程序统计平台→「阿拉丁」、知识星球（宇宙有很多星球 → 里面好多社群）。理论支点是《超级符号原理》「超级符号 = 一个非常强大的喻体」。</li><li><strong>MECE 推演</strong>：把用户分三类（知道且已加入 / 知道未加入 / 不知道），逐一推演看到名字的第一反应。「生财日历」→「询问，买」/「骗子，拉黑」；「生财有术日历」→「买」/「感兴趣，买，加入」/「感兴趣，搜索，买，加入」。「你会问一下」就是在增加认知成本。</li><li><strong>品牌重复</strong>：每做一个产品都复用前缀（生财有术日历／小册／案例集／小讲／内参），「越往后，势能越大」。</li><li>传导链：降低认知成本 → 降低传播成本 → 提高用户数量 → 提高收入。</li></ul>
+<h2 id="6-7-能力圈与技能树-为什么先打通一个领域-38">6.7 能力圈与技能树：为什么先打通一个领域 <a class="ref" href="#post-38" title="跳转到附录 A 第 38 篇">[38]</a></h2>
+<ul><li>「但 99.99% 都会失败，因为我们只看到事情表面，这些不够。」看别人赚钱前先问四句：别人有什么资源？背后付出了多少时间精力？整个流程模式是什么样？需要什么知识技能？再对比自己能付出什么。</li><li>「人总是会误会自己的擅长和不擅长」：不擅长的领域只看到皮毛觉得简单；擅长的领域因看到深处的困难反而畏手畏脚。</li><li>在擅长领域提升最快的三个理由：知识点最熟（知道去哪查、找哪个专家、怎么练）／对用户最熟悉／技能可迁移（产品、运营、营销、文案「都有固定的套路，是可以完全用在不同领域的」）。</li><li><strong>自证</strong>：「我做爬虫课练习的写作能力，运营能力，产品能力，就完全照搬到知识星球网站了。如果我没有先做爬虫课，直接做网站，绝对会失败。」</li><li>阶段原则（大猫哥）：「如果你没做过从 0 到 1 赚钱的事情，就不要整天研究别人年赚百万、千万的赚钱案例。」另：「大事做不了，小事不愿意做」「要让自己的能力跟的上认知」「脏活累活出奇迹」（亦仁）。</li></ul>
+<h2 id="6-8-案例拆解四清单-what-why-how-to-32">6.8 案例拆解四清单（what / why / how to）<a class="ref" href="#post-32" title="跳转到附录 A 第 32 篇">[32]</a></h2>
+<p>见第三编 3.6 表格。补充要点：营销与变现的 how to 为空——「营销是个动词，所以讨论 what 的时候，就是在讨论 how」；需求 why 用马斯洛五层次定位；流量 what 有三种查法（各平台搜产品名、试用产品看增长机制、看行业拆解复盘）。「阻碍赚钱的，不是无知，是傲慢。」</p>
+<h2 id="6-9-黄金圈法则与-landing-page-66">6.9 黄金圈法则与 landing page <a class="ref" href="#post-66" title="跳转到附录 A 第 66 篇">[66]</a></h2>
+<ul><li>源：TED《How great leaders inspire action》。大脑最里面控制感情、做决策 = why；外圈大脑皮层负责逻辑 = how / what。</li><li>由外向内描述（先讲产品）→ 大脑要解析大量复杂信息，精力消耗过多，不足以激发行为；<strong>由内向外（先讲信念）</strong> → 直接与决策层交流，控制行为。</li><li>落地：landing page 首页大字「讲情怀方面的，而不是介绍产品」；「你必须首先，让用户知道，他为什么（why）需要你这个东西」。</li><li>「人们不是在买你的产品，人们是在买你的信念。」「经济学里也讲过，决定你价格的不是价值，而是需求。」</li></ul>
+<h2 id="6-10-定价-分销与-让出利益换流量-48-76-41">6.10 定价、分销与「让出利益换流量」<a class="ref" href="#post-48" title="跳转到附录 A 第 48 篇">[48]</a><a class="ref" href="#post-76" title="跳转到附录 A 第 76 篇">[76]</a><a class="ref" href="#post-41" title="跳转到附录 A 第 41 篇">[41]</a></h2>
+<ul><li><strong><a class="ref" href="#post-48" title="跳转到附录 A 第 48 篇">[48]</a> 9.9 → 19.9 阶梯分销</strong>：没流量时把分销比例开到 90%（9.9 元也就 9 块，给人占超大便宜的感觉），让第一批用户当「广告牌」；带一句「明天就涨价了」制造紧迫感 → 涨到 19.9、分销降到 80%（朋友赚 15 块）→ 逐步涨价、逐步降比例 → 自主销量达标拿到平台官方推荐位 + 用户证言提高信任 → 分销降到约 40%。两条总结：「当你没有流量的时候，让出最多的利益，让用户当你的广告牌」「低价用百分比宣传，高价用百分比算出来的价格宣传」。最终 1w+ 付费学员。</li><li><strong><a class="ref" href="#post-76" title="跳转到附录 A 第 76 篇">[76]</a> 知乎 Live 分钱裂变</strong>：拿出 50% 收入发红包换自发宣传 → 把宣传者拉进一个群（「省的你找种子用户了」）→ live 从 1000 人涨到 4000 人 → 群改名「大数据付费社群」、群内人免费、后来者付费（占便宜心理）→ 再转化到付费小密圈。可复制三点：分钱 / 把宣传者沉淀成群 / 适合垂直领域吸精准粉。</li><li><strong><a class="ref" href="#post-41" title="跳转到附录 A 第 41 篇">[41]</a> 生财拉新 245 人</strong>：提前 20 天，3 篇「用来承载流量的产品」（文章）+ 人工拉群、群禁言、进群前先发推广文筛掉非意向用户、提前存邀请链接并浮窗；借鉴别人「买 X 送 Y」做置顶留言；也诚实复盘失误（SEM 若提前一个月做，保守估计可多 300 人；花 10 天写的一篇干货「垮掉了」，史上阅读最低）。</li></ul>
+<hr>
+
+<h1 id="第七编-流量与增长实操库-早期-术-的完整档案">第七编　流量与增长实操库（早期「术」的完整档案）</h1>
+<blockquote>这一编是他 2017–2021 年的具体打法。它们与他后期的「反干货」立场存在张力（见 1.6），但作为<strong>能力训练的记录</strong>和<strong>案例库</strong>仍有很高价值。部分玩法（批量抓微信号、薅羊毛、批量注册）在今天已有平台规则与合规风险，仅作思想史料收录，不建议照搬。</blockquote>
+<h2 id="7-1-借别人的流量-5-步复制-SOP-39">7.1 借别人的流量：5 步复制 SOP <a class="ref" href="#post-39" title="跳转到附录 A 第 39 篇">[39]</a></h2>
+<p><strong>原案例复盘</strong>：在别人爆文下看到一条留言提到「诸葛飞冬网络笔记」→ 百度搜 → 首页全是新浪博客，标题诱人 → 点进目录页最吸引人的那篇 → 文章前段文案 + 箭头指向超链接 → 到网站，引导加个人号并要求备注（不同备注区分渠道）→ 通过好友后「发个红包，给你发更高版本的笔记」，PDF 讲《天道》的逆向思维。</p>
+<p><strong>复制 5 步</strong>：</p>
+<ol><li>准备一个承接用户的产品（服务、星球、课程、资料）；没产品也可「用户申请后，你隔 2 天再通过，他肯定不记得当时为啥加你了」。</li><li>新造一个搜索引擎搜不到的<strong>新词</strong>——加英文双引号在谷歌验证。</li><li>找一个平台写几篇文章，标题含新词，内容放微信号和钩子；「尽量长一点，搜索引擎收录的可能性更大」，新浪博客／简书即可，多写几篇让搜索结果全是自己的；「搜索引擎可能多一周才会收录」，随时百度验证。</li><li>打磨留言文案：<strong>先夸作者和文章</strong>（显得认真看过）→ 间接提「在网上看到一篇文章 XX」而不直接说百度 → 描述方法优点（室友两年买房、颠覆认知）→「轻描淡写的来一句『想看的朋友百度下』」→ 结尾再夸作者。被删就改、再测。「这个文案，决定了你的转化率，所以花多少时间都不为过。」</li><li>去目标用户平台用站内搜索找文章（「去简书搜索『赚钱』，有 3w 多个结果」），在可以直接留言的平台留言。</li></ol>
+<p>转化漏斗假设：阅读 3000 → 10% 去百度 = 300 人 → 10% 加微信 = 30 人。「这个方法，几乎没有门槛，如果说有门槛的话，就是执行力了。」</p>
+<h2 id="7-2-SEO-与站群-26-43-44">7.2 SEO 与站群 <a class="ref" href="#post-26" title="跳转到附录 A 第 26 篇">[26]</a><a class="ref" href="#post-43" title="跳转到附录 A 第 43 篇">[43]</a><a class="ref" href="#post-44" title="跳转到附录 A 第 44 篇">[44]</a></h2>
+<p><strong><a class="ref" href="#post-26" title="跳转到附录 A 第 26 篇">[26]</a> 知识星球分销网站（完整 9 步）</strong>：</p>
+<div class="table-wrap"><table><thead><tr><th>环节</th><th>关键动作</th></tr></thead><tbody><tr><td>MVP</td><td>先在公众号发一篇介绍几个星球的文章，验证带来好几百块佣金</td></tr><tr><td>行动前 3 问</td><td>字数太多影响阅读体验（1 个星球 500 字 × 20 = 1 万字）／流量从哪来／侵权风险（请教条形马老师 → 找 wulujia 老师获授权）</td></tr><tr><td>定位</td><td>建网站、每个网页介绍一个星球；流量靠百度 SEO（先搜「知识星球」「知识星球推荐」，发现无 Title 含该关键词的独立站，判断竞争小）</td></tr><tr><td>搭建</td><td>阿里云约 1000 元/年 → WordPress（后台复杂，放弃）→「上线了」1000 元/年（个性化麻烦、速度慢，放弃）→ 回到 WordPress 重新搜教程做成功</td></tr><tr><td>内容</td><td>花 <strong>70% 精力</strong>研究介绍星球；每篇固定 4 部分：星主介绍 / 星球介绍 / 星球数据（创建时间、人数、发帖数、问答数、精华数、活跃度）/ 推荐理由</td></tr><tr><td>SEO</td><td>照《SEO 实战密码》优化网站标题、文章标题、小标题、加粗字、图片 alt、菜单栏；去百度知道、新浪博客、知乎、简书加外链、找网站加友链</td></tr><tr><td>速度</td><td>花 999 元找专业优化服务，打开速度从 4–5 秒到不到 1 秒</td></tr><tr><td>增长 4 招</td><td>免费加更多星球（从排行榜挨个找星主谈）／合伙人机制（40 来个朋友参与）／增加干货文章（找星主授权）／主题优化（模仿顾小北，后买与《人人都是产品经理》同款主题）</td></tr><tr><td>结果</td><td>写到 60 多篇文章才慢慢有流量和收入；稳定期每天 500 UV、每月被动收入 1 万+</td></tr></tbody></table></div>
+<blockquote>「无论任何知识，只要我们想学，都能在互联网上找到教程，然后学会、做到。」<br>更真实的路径：①学知识思路案例提升见识 → ②尝试、失败、学知识练技能、再尝试 → ③多次后做成事赚到钱。</blockquote>
+<p><strong><a class="ref" href="#post-43" title="跳转到附录 A 第 43 篇">[43]</a> BAT 信息深井找需求</strong>：「同样的需求，到不同的渠道，赚不同人的钱。」淘宝、知乎、豆瓣、微信、百度、个人站构成循环的需求供应链；「神仙打架，就给了我们一些机会」。SOP：去淘宝看没想到但成交量大的 → 百度指数验证量 → 多且竞争不大就建站用百度 SEO 承接 → 反向变体（百度搜需求去淘宝开店、微信搜需求去百度找用户）→ 自己做个 MVP 测测。示范：一个做 mac 软件下载的付费站（WordPress + 其他免费站资源），不到 3 个月已盈利，会员 4 条权益（无限制下载 / 更新通知 / 优先响应软件游戏请求 / 特殊软件安装调试）。</p>
+<p><strong><a class="ref" href="#post-44" title="跳转到附录 A 第 44 篇">[44]</a> 百度 site 语法 + webscraper</strong>：站内判断不了帖子热度时，用「纸尿裤 site: 网站名」让搜索引擎按热度排序；webscraper 翻页在 Element click 的 <code>click more</code> 不行时换 <code>click Once</code>（按顺序翻页）。教训：「遇到不理解的事情，不要急于下结论。多思考一会，就会收获很多。」「在一个领域比你牛逼的人，可能在其他领域都比你牛逼。」</p>
+<h2 id="7-3-裂变-分销与活动运营-48-76-45-41-65">7.3 裂变、分销与活动运营 <a class="ref" href="#post-48" title="跳转到附录 A 第 48 篇">[48]</a><a class="ref" href="#post-76" title="跳转到附录 A 第 76 篇">[76]</a><a class="ref" href="#post-45" title="跳转到附录 A 第 45 篇">[45]</a><a class="ref" href="#post-41" title="跳转到附录 A 第 41 篇">[41]</a><a class="ref" href="#post-65" title="跳转到附录 A 第 65 篇">[65]</a></h2>
+<ul><li><strong><a class="ref" href="#post-48" title="跳转到附录 A 第 48 篇">[48]</a></strong> 9.9 → 19.9 阶梯分销（详见 6.10）。</li><li><strong><a class="ref" href="#post-76" title="跳转到附录 A 第 76 篇">[76]</a></strong> 知乎 Live 分钱裂变（详见 6.10）。</li><li><strong><a class="ref" href="#post-45" title="跳转到附录 A 第 45 篇">[45]</a> 蛋黄酥白皮书</strong>：朋友圈卖蛋黄酥（5 元/个、运费 8 元、满 10 个免运费、花 666 拍写真、厂家直发不囤货、一天卖 3000 个）做 MVP → 推出 99 元「白皮书」教朋友圈营销全套（文案优化 + 美图 + 涨粉策略 + 转化技巧）并给批发价 → 学员发朋友圈卖货，500 人满员 →「一次工作，将自己的收入放大 500 倍」「你睡觉的时候，500 个人在源源不断的帮你赚钱」；项目终身、消耗品复购高。标签：案例 / 网赚 / 精益创业。</li><li><strong><a class="ref" href="#post-41" title="跳转到附录 A 第 41 篇">[41]</a></strong> 生财拉新 245 人（详见 6.10）。</li><li><strong><a class="ref" href="#post-65" title="跳转到附录 A 第 65 篇">[65]</a> 搜狐 iPhone8 蹭热点裂变</strong>：朋友圈海报 → 下载客户端 → 分享活动页拉票 → 关注公众号发「点赞」→ 关注后推两条消息（客服微信 / 已参加活动用户群二维码）。「这个活动，一波流量，用在了 4 处：客户端、公众号、客服、微信群。」</li><li><strong><a class="ref" href="#post-71" title="跳转到附录 A 第 71 篇">[71]</a> 热点图片生成小程序</strong>：「每一次热点，都会引发那么一波娱乐」；做「暴走漫画制造器」式的傻瓜化工具，门槛够低就易传播；关键细节——<strong>图片上要留下自己的二维码</strong>（charlie 哥「微生成」好用但没留二维码，所以没传播起来）。</li></ul>
+<h2 id="7-4-信息差-47-58-72-43">7.4 信息差 <a class="ref" href="#post-47" title="跳转到附录 A 第 47 篇">[47]</a><a class="ref" href="#post-58" title="跳转到附录 A 第 58 篇">[58]</a><a class="ref" href="#post-72" title="跳转到附录 A 第 72 篇">[72]</a><a class="ref" href="#post-43" title="跳转到附录 A 第 43 篇">[43]</a></h2>
+<ul><li><strong><a class="ref" href="#post-47" title="跳转到附录 A 第 47 篇">[47]</a> 微信读书兑换码</strong>：把朋友圈／吾爱破解先一步获知的「13 个微信读书币 + 28 本图书兑换码」放公众号，破阅读记录 7000+（此前上不了 1000）；第二次只有 3 个代码，就做海报「扫码回复『微信读书』，送你 23 个读书币」，把入口放到关注自动回复，并附一句可分享海报（「不分享也无所谓」）。「不玩套路，其实也能涨粉，还不累」「信息差才能获利」。</li><li><strong><a class="ref" href="#post-58" title="跳转到附录 A 第 58 篇">[58]</a> 得到 4.99</strong>：把 199 元专栏摘出精彩部分单卖 4.99，最多近 3 万份，面向未订阅用户的额外收入，并可能反向带来专栏转化——「打破了这部分人的『专栏魔咒』」。</li><li><strong><a class="ref" href="#post-72" title="跳转到附录 A 第 72 篇">[72]</a> 微信读书薅羊毛</strong>：从「一周阅读 130 多小时」的异常数据反推机制漏洞（读半小时领书币、买一赠一、群控刷时长、淘宝 85 折送书）。他的关注点不是玩法本身，而是「进了圈子后，发现对这些东西更敏感了」——<strong>认知提升带来的敏感度</strong>。</li><li><strong><a class="ref" href="#post-51" title="跳转到附录 A 第 51 篇">[51]</a><a class="ref" href="#post-52" title="跳转到附录 A 第 52 篇">[52]</a> 找种子用户</strong>：抖音／微博评论区搜「留下微信号」，加好友做淘宝客。「虽然有点重，但是对于没有一点资源的人来说，也不失为一种方法。」</li></ul>
+<h2 id="7-5-线下流量-53-46-63">7.5 线下流量 <a class="ref" href="#post-53" title="跳转到附录 A 第 53 篇">[53]</a><a class="ref" href="#post-46" title="跳转到附录 A 第 46 篇">[46]</a><a class="ref" href="#post-63" title="跳转到附录 A 第 63 篇">[63]</a></h2>
+<p><strong><a class="ref" href="#post-53" title="跳转到附录 A 第 53 篇">[53]</a> 春节 6 点框架</strong>（把长假当线下赚钱机会）：</p>
+<ol><li>消费意愿：放假、小孩有压岁钱、家长更愿意答应孩子</li><li>线下流量大：节日氛围好、出门概率大</li><li>转化率：「人们不会平白无故买你的东西，你需要给它一个买你东西的理由，这点就要好的文案」（例：「新年了，将自己的梦想写到孔明灯上，让天空和白云来做见证」）</li><li>选品：短期销售型、高利润、有吸引力；春节不发快递，<strong>只有一次机会</strong>；多品类平摊风险（孔明灯 / 气球「不到一块的成本，可以卖到 5 块钱」/ 狗年毛绒玩具配「从 1 写到 300，不出错免费领」的稳赚游戏）</li><li>矩阵思维（Jimi）：位置矩阵（只在一个地方可能只触达 20% 流量）+ 品类矩阵，「最大限度的将流量全部收割」</li><li>高级玩法：便宜东西「加微信免费送」，把线下流量变线上，后续朋友圈做淘宝客；先谈好收益分配</li></ol>
+<p><strong><a class="ref" href="#post-46" title="跳转到附录 A 第 46 篇">[46]</a> 转盘抽奖失败复盘</strong>（扫码 → 转盘抽奖 → 领奖品，惨淡收场）：</p>
+<ul><li>失败 3 原因：选品有误（都冲一等奖狗狗玩偶来）／海报差（本想淘宝做易拉宝，实际自己画）／流程太繁琐（扫码 + 转盘一个人约 1 分钟）</li><li>4 条经验：① 线下获客<strong>一定要做裂变</strong>（发海报集赞领奖，集赞是门槛，奖品单价 10 元，一个用户变多个摊薄成本）②「不要搞免费的活动，一定要有门槛。要不大家会以为你是骗子」③ 海报奖品提前落实 ④ 用户关注后要给一个留下来的理由（5/6 线主打超市优惠、菜价优惠）</li><li>变现设想：给饭店写软文接广告、信息差做淘宝客、复制到周边几十个城镇号</li></ul>
+<p><strong><a class="ref" href="#post-63" title="跳转到附录 A 第 63 篇">[63]</a>《影响力》落地</strong>：线下手机店 → 有赞开店（图片文案参照京东淘宝）+ 公众号 → 门前放鞭炮 + 扫码送手机挂饰（<strong>互惠</strong>原理）→ 送挂饰时用话术让用户承诺「以后买手机，会来这家店」（<strong>一致性</strong>原理）。</p>
+<h2 id="7-6-平台差与内容再加工-40-66">7.6 平台差与内容再加工 <a class="ref" href="#post-40" title="跳转到附录 A 第 40 篇">[40]</a><a class="ref" href="#post-66" title="跳转到附录 A 第 66 篇">[66]</a></h2>
+<p><strong><a class="ref" href="#post-40" title="跳转到附录 A 第 40 篇">[40]</a>「图文领域的所有内容，都值得用短视频重新做一遍」</strong>（千万粉丝短视频大佬吴建，4 月 13 日线下聚会）：</p>
+<ul><li>需求已验证：公众号文章火 = 转发人多 = 喜闻乐见；「采铜于山即可」，无需原创</li><li>找爆文：看一看 / 新榜 / 朋友圈；输入端延伸到音频（得到、喜马拉雅、凯叔讲故事、千聊、荔枝微课）</li><li>改进四字诀：<strong>换用户 / 换场景 / 换需求 / 换平台</strong></li><li>展现形式：真人出镜（首选，如蛋解创业）/ PPT + 文字 + 宏大背景音乐 / 漫画对话</li><li>输出端平台清单：火山、西瓜、快手、微视、全民小视频、趣多拍、B站、YouTube、美拍、秒拍、小咖秀、梨视频；「先做一批试水，效果好的话，就快速批量复制」</li><li>变现 4 种：广告 / 带货（书课商品）/ 卖号 / 引流到微信</li><li>参照案例：「夜听」把文字用电台形式展现，半年 1500w 粉丝</li><li>佳哥的 5 条冷水：别人火了照抄不一定火 / 别人能带货你不一定能 / 短视频导师不告诉你怎么赚钱 / 有公众号经验不一定做得好短视频 / 做抖音前先了解「算法分发」</li></ul>
+<p><strong><a class="ref" href="#post-66" title="跳转到附录 A 第 66 篇">[66]</a> 黄金圈写 landing page</strong>（见 6.9）。<strong><a class="ref" href="#post-73" title="跳转到附录 A 第 73 篇">[73]</a> 求点赞弄巧成拙</strong>：「转发朋友圈，唯一的作用就是增大曝光」；求点赞会让关系好的直接点赞不点开、关系不好的直接屏蔽，「若是你的标题起的吸引人，用户点开的可能性会更大一些」。</p>
+<h2 id="7-7-工具链清单">7.7 工具链清单</h2>
+<div class="table-wrap"><table><thead><tr><th>类别</th><th>工具</th></tr></thead><tbody><tr><td>数据采集</td><td>webscraper（Chrome 插件，他的成名课）、八爪鱼、火车头、后羿采集器、百度 site 语法</td></tr><tr><td>建站</td><td>WordPress、阿里云、「上线了」、CDN、百度 SEO、外链/友链、WordPress 主题</td></tr><tr><td>内容/协作</td><td>石墨文档、微信公众号、知识星球、飞书文档、印象笔记、有赞、易灵微课、荔枝微课</td></tr><tr><td>平台</td><td>淘宝、1688、拼多多、闲鱼、知乎、豆瓣、简书、新浪博客、微博、抖音、快手、B站、小红书、得到、喜马拉雅</td></tr><tr><td>验证</td><td>百度指数、微信指数、360/爱站指数、调查问卷、MVP</td></tr><tr><td>AI（2025）</td><td>Gemini、cursor、claude code、mcp、v0、codex、GML4.6、ChatGPT、VS Code</td></tr></tbody></table></div>
+<h2 id="7-8-增长心法-10-条-跨帖归纳">7.8 增长心法 10 条（跨帖归纳）</h2>
+<ol><li>先验证再投入（MVP），「想不清楚如何推广的产品，没必要做」</li><li>没流量时让出最多利益换种子用户</li><li>低价宣传百分比、高价宣传算出来的金额</li><li>一次流量要尽量多载体承接</li><li>传播素材上必须留下自己的入口（二维码）</li><li>免费活动要有门槛，否则被当成骗子</li><li>线下一定要做裂变，关注后要给留存理由</li><li>「同样的需求，到不同的渠道，赚不同人的钱」</li><li>信息差来自「我先一步知道」，不是套路</li><li>别人火了照抄不一定火——先看算法／需求／信任是否相同</li></ol>
+<hr>
+
+<h1 id="第八编-能量-情绪与健康系统">第八编　能量、情绪与健康系统</h1>
+<h2 id="8-1-能力-vs-能量-20">8.1 能力 vs 能量 <a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a></h2>
+<blockquote>「衡量一个人有多大成就，有 2 个因素：1 能力 2 能量。能力就是各种知识、技能，帮助我们做成事情，赚到钱；能量就是体力、心情、状态……我个人觉得，能量比能力更重要。」</blockquote>
+<p>因为一个人能量不足（经常内耗、焦虑），就没法静心认真学习行动，能力一定不会持续提高，结果就是做不成更有难度的事、收入不会持续提高。「我公众号里，经常会写修心方面的文章，就是为了让自己维持一个稳定的能量状态。」</p>
+<blockquote>「成长过程中，90% 的问题，无论工作、还是赚钱、还是学习中，遇到问题、困难、障碍，核心原因，不是方法、技巧、方向，而是心理因素，或者说情绪问题。焦虑、迷茫、担忧、恐惧、不自信……然后，就卡在那里，什么执行力、思考能力、理性分析能力，都没了。」</blockquote>
+<h2 id="8-2-情绪调节方法与完整书单-20-6-22-29-33">8.2 情绪调节方法与完整书单 <a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a><a class="ref" href="#post-6" title="跳转到附录 A 第 6 篇">[6]</a><a class="ref" href="#post-22" title="跳转到附录 A 第 22 篇">[22]</a><a class="ref" href="#post-29" title="跳转到附录 A 第 29 篇">[29]</a><a class="ref" href="#post-33" title="跳转到附录 A 第 33 篇">[33]</a></h2>
+<p><strong>方法清单</strong>：</p>
+<div class="table-wrap"><table><thead><tr><th>方法</th><th>出处</th><th>要点</th></tr></thead><tbody><tr><td>解离</td><td><a class="ref" href="#post-6" title="跳转到附录 A 第 6 篇">[6]</a></td><td>把大脑认为的困难，和当下的实际情况分开；贴在眼前，每 5 分钟复习一次</td></tr><tr><td>正念 / 冥想</td><td><a class="ref" href="#post-14" title="跳转到附录 A 第 14 篇">[14]</a><a class="ref" href="#post-33" title="跳转到附录 A 第 33 篇">[33]</a><a class="ref" href="#post-22" title="跳转到附录 A 第 22 篇">[22]</a></td><td>观察自己、控制情绪；「八风吹不动」（称讥毁誉利衰苦乐）</td></tr><tr><td>接受结果</td><td><a class="ref" href="#post-22" title="跳转到附录 A 第 22 篇">[22]</a></td><td>可以反省但不要自责；「只是这件事情评估错了，不代表我自己这个人不好」</td></tr><tr><td>课题分离</td><td><a class="ref" href="#post-29" title="跳转到附录 A 第 29 篇">[29]</a></td><td>阿德勒：别人赚钱是别人的课题，你没赚钱是你的课题</td></tr><tr><td>想象</td><td><a class="ref" href="#post-24" title="跳转到附录 A 第 24 篇">[24]</a><a class="ref" href="#post-22" title="跳转到附录 A 第 22 篇">[22]</a></td><td>想象目标已达成「想的非常具体、非常有色彩」，分泌多巴胺；睡前看积极信息</td></tr><tr><td>写下来</td><td><a class="ref" href="#post-18" title="跳转到附录 A 第 18 篇">[18]</a><a class="ref" href="#post-9" title="跳转到附录 A 第 9 篇">[9]</a></td><td>焦虑时把方方面面全写下来（也见《写作禅》：顺着情绪找根源）</td></tr><tr><td>墙上贴纸</td><td><a class="ref" href="#post-6" title="跳转到附录 A 第 6 篇">[6]</a><a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a></td><td>卧室到客厅厨房卫生间贴满，分三类：提供能量 / 刻意练习的方法 / 思考模型</td></tr><tr><td>深入思考</td><td><a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a></td><td>「深入思考，可以破除一切焦虑」「深入思考，可以破除一切消极情绪」</td></tr><tr><td>环境隔离</td><td><a class="ref" href="#post-6" title="跳转到附录 A 第 6 篇">[6]</a></td><td>屏蔽产生坏惯性的信息源，进入好惯性圈子</td></tr><tr><td>让写作的归写作</td><td><a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a></td><td>期待从「变现」换成「让自己变成更好的自己」</td></tr></tbody></table></div>
+<p><strong>他自述读过的情绪／心理／哲学书单</strong>（<a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a><a class="ref" href="#post-33" title="跳转到附录 A 第 33 篇">[33]</a> 原文列举，含重复）：《你的生存本能正在杀死你》《大脑幸福密码》《幸福的陷阱》《每个人的战争》《轻疗愈》《正念的奇迹》《次第花开》《当下的力量》《减压脑科学》《心态》《逆商》《钝感力》《焦虑症自救指南》《应对焦虑》《一平方米的静心》《跳出头脑，融入生活》《幸福的方法》《与哲学家谈快乐》《哲学的慰藉》《人生只有一件事》《写作禅》《原则》《影响力》。</p>
+<blockquote>「聊情绪这件事，我可以从很多不同角度找到解决方案：生理、大脑、心理、神经、哲学。」<br>「我知道一个情绪从看到一个消息到大脑神经、到理性脑、到身体反应、到表现、到行动每一个环节，我都知道它的原理以及，如何解决。」</blockquote>
+<h2 id="8-3-恶性循环-良性循环-希望的机制-20-29">8.3 恶性循环 → 良性循环：希望的机制 <a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a><a class="ref" href="#post-29" title="跳转到附录 A 第 29 篇">[29]</a></h2>
+<p><strong>恶性循环</strong>：生病引起疼痛 → 疼痛影响生活、工作、锻炼 → 心情变差 → 加剧病情。</p>
+<p><strong>良性循环</strong>：心里有希望 → 积极治疗、锻炼、学习 → 身体变好、心情更好、习惯更好 → 身体更好 → 希望更大。</p>
+<blockquote>「所谓希望，就是一个人相信自己的明天，会因为今天的努力而变得更好。这里的重点是，明天不会自动变得更好。明天之所以能变得更好，是因为今天的行动，是因为今天用正确的方式，做了正确的事情。」</blockquote>
+<p>配套诗句（他两次引用「发展时区」小诗）：纽约时间比加州早三小时；有人 22 岁毕业但等了 5 年才找到工作、25 岁当 CEO 却 50 岁去世、奥巴马 55 岁退休、川普 70 岁才当总统。「盲目对比，是痛苦的最大根源之一。」</p>
+<h2 id="8-4-强直性脊柱炎的完整自我管理方案-20-33-4">8.4 强直性脊柱炎的完整自我管理方案 <a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a><a class="ref" href="#post-33" title="跳转到附录 A 第 33 篇">[33]</a><a class="ref" href="#post-4" title="跳转到附录 A 第 4 篇">[4]</a></h2>
+<div class="table-wrap"><table><thead><tr><th>维度</th><th>具体做法</th></tr></thead><tbody><tr><td>医疗</td><td>西安三甲医院主任挂号（先网上付费诊断「混脸熟」加号）→ 生物制剂（一针 5000、每月一次，长达 2 年；打完 2–3 天疼痛减轻约 70%）→ 从活跃期转稳定期</td></tr><tr><td>锻炼</td><td>健身房请私教，每周 5 次、每次 2 小时康复训练；每天额外 1–2 小时自己锻炼；曾每周 3–4 次</td></tr><tr><td>饮食</td><td>自己做饭；中午先来一盘蔬菜；不吃精面粉、白米饭、精制糖、外卖；主食杂粮馒头／全麦面包／糙米粉；蛋白质豆子／鸡肉／鱼肉</td></tr><tr><td>作息</td><td>早睡早起，昵称即「晚9点半睡觉」；控制情绪（情绪波动会直接加重疼痛）</td></tr><tr><td>认知</td><td>从「期待神药」转为系统研究病理（读《每个人的战争》2 遍 + 神经免疫学书），「我对这个病的恐惧也慢慢在减小」</td></tr></tbody></table></div>
+<p><strong>踩过的坑</strong>（他自己复盘为「走了很大的弯路」）：百度搜到「特效药可完全治愈」的医院，独自从西安去北京，5000 元买回一包中药粉，回来病情反而加重、休学一年；中药、针灸、红外线、膏药、鸽子毛泡脚、草药烟熏等偏方；止痛药有止疼成分造成「有效」的错觉；私自停药。</p>
+<p><strong>「每天锻炼 1 小时，一年多赚 20 万」的逻辑</strong> <a class="ref" href="#post-4" title="跳转到附录 A 第 4 篇">[4]</a>：不是鸡汤，而是——这一小时换回「减少 30% 的焦虑、增加 50% 的快乐、减少 80% 的腰酸背痛、增加 100% 自信」，而「赚钱需要的必备条件：清晰的思考，高效的学习，强大的执行力，心力」，全部依赖这些。所以「锻炼这件事本身，就是在赚钱」。</p>
+<blockquote><strong>注意</strong>：文中 30%/50%/80%/100% 与「一年多赚 20 万」是作者用于说理的主观量化，不是可验证的统计数据，本手册按原话保留、不作事实背书。</blockquote>
+<h2 id="8-5-为什么这套系统在他的体系里是-地基-而非-附录">8.5 为什么这套系统在他的体系里是「地基」而非「附录」</h2>
+<p>他做每一件事都站在人生角度：日新月异俱乐部强调「重要不紧急」的基本功；<a class="ref" href="#post-5" title="跳转到附录 A 第 5 篇">[5]</a> 的年终复盘把「健康」放在事业之前，用「健康、事业、亲密关系」三件事做全年框架；<a class="ref" href="#post-16" title="跳转到附录 A 第 16 篇">[16]</a> 把情绪管理列入每日 7 问复盘。<strong>赚钱系统的最底层是身体和情绪</strong>——这是他与绝大多数「项目型」博主最根本的区别。</p>
+<hr>
+
+<h1 id="第九编-2025-新变量-AI-与元认知-1">第九编　2025 新变量：AI 与元认知 <a class="ref" href="#post-1" title="跳转到附录 A 第 1 篇">[1]</a></h1>
+<h2 id="9-1-Gemini-4-小时做出-APP-完整复盘">9.1 Gemini 4 小时做出 APP 完整复盘</h2>
+<p><strong>背景</strong>：快 10 年没写代码；此前大半年折腾 AI 编程（cursor、claude code、mcp、v0、codex、各种教程）一直失败，处在「绝望之谷」。10 月 16 日上午 10 点开始，用 Gemini 做《一念一世界》APP，<strong>4 小时跑通</strong>（后端数据库、前端界面、前后交互逻辑），此前给自己定的期限是 3 天（因为周天要爬西湖标毅好向朋友炫耀）。</p>
+<p><strong>动作时间线</strong>：</p>
+<ol><li>给 Gemini 发：「我的目标是，3 天内完成一个 APP，功能是什么什么，你帮我梳理计划，并指导我一步一步操作。」</li><li>看方案，不懂就追问「为啥要这么做」，推敲几轮定稿。</li><li>一步步执行，代码复制粘贴到它指定的位置；操作不明确就<strong>截图</strong>给它；「连一个箭头找不到，我都会问它」。</li><li>全程只用 Gemini + 截图，没用 cursor / claude code / mcp。</li></ol>
+<p><strong>与 AI 交互的 4 步循环</strong>（他称为「AI 编程最重要的一句话」）：</p>
+<pre><code>1 我提问，它回答
+2 我 100% 认同才行动
+3 但凡有一丢丢不理解 → 回到 1
+4 执行遇错 → 截图丢给 AI 分析解答 → 回到 2</code></pre>
+<p><strong>3 类 why</strong>：为什么要做这件事 / 这个结果为什么会出现 / 为什么你会给出这个建议。</p>
+<h2 id="9-2-真正的转折不是工具-是元认知">9.2 真正的转折不是工具，是元认知</h2>
+<p>前两次失败后，他闭眼回放经历约 15 分钟，找到问题：「<strong>我把自己搞丢了</strong>」——一直在照着教程走，忘了自己才是那个要理解、要判断的人。随即关掉《claude code 编程指南》《AI 应用 - iOS APP》两个文档，改用「把 Gemini 当成坐在我旁边的一个全知全能的顾问」。</p>
+<blockquote>「忘记所有之前看过的『教程』里的『应该怎么怎么做』，一步一步，跟着 AI 去操作，不懂的就即时对话、探讨，直到得到结论。」<br>「我 4 小时的行动，抵过我之前大半年的折腾，并且效果好 100 倍。」</blockquote>
+<p><strong>愿力 &gt; 业力 &gt; 能力</strong>（罗振宇）：他用来解释为什么在能力（快 10 年没写代码）和系统条件都没变的情况下，结果差了 100 倍。同时引亦仁、李笑来的「2 颗核弹」炸掉舒适圈、涛哥说的「路径依赖」，以及戒烟故事给的两个选择——「戒烟，失败—放弃 / 戒烟，失败—再来一次」，他选再来一次。</p>
+<h2 id="9-3-与他一贯体系的呼应">9.3 与他一贯体系的呼应</h2>
+<p>这一篇不是新道理，是老道理在新场景的验证：</p>
+<ul><li>「一字不差照做就能看到效果」的教程不存在 → 对应 A5 与 <a class="ref" href="#post-15" title="跳转到附录 A 第 15 篇">[15]</a>（反保姆级干货）</li><li>全程追问 why → 对应 3.3</li><li>忘掉教程、跟着对话走 → 对应「原理 &gt; 方法」</li><li>「我把自己搞丢了」 → 对应 A6 能量 / 元认知、以及他反复强调的「写自己」</li></ul>
+<blockquote><strong>判断</strong>：2025 年的他，方法论已经稳定到可以迁移到全新领域：换掉的是工具，没换的是「独立思考 + 追问原理 + 亲自实践」这套内核。</blockquote>
+<hr>
+
+<h1 id="第十编-事业与产品化-日新月异俱乐部-20-17-18">第十编　事业与产品化：日新月异俱乐部 <a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a><a class="ref" href="#post-17" title="跳转到附录 A 第 17 篇">[17]</a><a class="ref" href="#post-18" title="跳转到附录 A 第 18 篇">[18]</a></h1>
+<h2 id="10-1-三次关键咨询">10.1 三次关键咨询</h2>
+<p><strong>① 亦仁（2022 年 4 月，7 颗龙珠 ≈ 7 万）</strong>：他整理了自己能做的十来项业务（爬虫课、写作、做课、销售文案、个人咨询、时间管理、情绪管理、知识体系、个人 IP 陪跑……），亦仁<strong>全部推翻</strong>，理由是从需求角度判断「这些业务不论哪一个，都没有让我一年赚到 300 万，因为需求都不强」。给出的方向是：</p>
+<blockquote><strong>日新月异俱乐部：带用户每天坚持做一件事，每天刷新自己。</strong>（名字也是亦仁取的）<br>「因为无论任何事情，我们要拿到结果，都必须落实到每天的行动上。」</blockquote>
+<p>他当时「完全没有准备好，觉得自己的能力做不好这件事」，也没有立刻执行。</p>
+<p><strong>② 涛哥</strong>：「当前最优解」——不要指望凭现在的认知想清楚一个能做 10 年的商业模式；选中当下最能做好的事去做，人会成长，最优解会变，到时候再换。另有一句后来被他反复引用：「让写作的归写作，让赚钱的归赚钱。」</p>
+<p><strong>③ 光合老师</strong>：「明白，你有没有清楚，你未来想成为什么样的人？」——以终为始；想清楚终点，当下每件事才有积累和复利，也能据此判断哪些事不能做。</p>
+<blockquote>他的反应：「3 位大佬给的建议，竟然是完全不一样的角度。这让我有点崩溃哈哈哈」，然后「稀里糊涂过了大半年」。<strong>这个「没有立刻执行」的细节很重要</strong>——他不是听完道理就顿悟的人，用了一年多才想通亦仁的建议。</blockquote>
+<h2 id="10-2-写作社群为什么让他难受-20">10.2 写作社群为什么让他难受 <a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a></h2>
+<p>他开过写作社群 + 写作课，卖得不错、大佬推荐、口碑也好，但「越往后我越做越难受」，两个原因：</p>
+<ol><li><strong>写作是反人性的技能</strong>：需要每天大量刻意练习，枯燥单调，多数人过了热乎劲就放弃 → 没有成功案例 → 社群无法正循环。</li><li><strong>写作与变现没有必然因果</strong>：「学会写作，是一个赚钱的基本功……要真正变现，除了写作能力，还需要产品设计、营销、销售、运营、需求挖掘等等」；他自己的变现是至少 1–2 年积累的结果。因此他没法用「功利、吸引人」的角度宣传，「非常没有自信和底气」。</li></ol>
+<p>这直接导向后来的定位修正：<strong>能力是因，赚钱是果；产品只负责提升能力，不承诺变现。</strong></p>
+<h2 id="10-3-草莓事件与产品定型-20-18">10.3 草莓事件与产品定型 <a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a><a class="ref" href="#post-18" title="跳转到附录 A 第 18 篇">[18]</a></h2>
+<p>2022 年底陈雪送草莓 → 30 分钟写成带货文 → 佣金 3000+ → 他反推出「思考的习惯」才是写作最值钱的产物 → 在写作星球内测<strong>写作专项打卡活动</strong>：带大家每天行动、刻意练习一个思维模型、锻炼思考习惯 → 反馈极好，做到第 20 期 → 他突然发现「和亦仁之前建议的模式，竟然是完全一致的！」</p>
+<blockquote>「带用户每天深入思考，刻意练习，然后打卡输出一段内容，每天刷新自己，这就是日新月异呀。」<br>「写作的本质是『思考』，而思考是做成任何一件事，都必须经历的一个过程。」<br>「我一直都坚信，写作是一个手段，而不是目的。」</blockquote>
+<p><strong>「把刀法练习 10000 遍」</strong> <a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a>：互联网让人产生「我掌握了很多方法、技巧，我现在变得很厉害了」的幻觉；「因为所以」这样简单的模型，不练几十几百遍也用不出来。行动营就是专门用来打破「一看就会，一做就废」的。</p>
+<h2 id="10-4-合伙人-产品体系与价值观-20">10.4 合伙人、产品体系与价值观 <a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a></h2>
+<p><strong>合伙人</strong>：根源老师（线下 9 年销售管理、2 万+ 咨询案例，转线上第一年变现 200 多万 / 220 万；「人与人之间的相处，是不会变的」；坚持亲手回复每个人、逐个发毕业证，这些「费力不讨好」的做法让他一开始觉得一厢情愿，后来承认是「因为无知产生的傲慢」）、陈雪老师（94 年，靠自己年入百万、杭州买房）。</p>
+<p><strong>定位</strong>：成长社群。训练「人生各项基本功」——写作、沟通、销售、经营关系、读书、复盘、感恩日记、个人 IP——都是「重要不紧急」的事。「加入日新月异俱乐部，收获绝大多数不会在当下，而是在一年后。」</p>
+<blockquote>「如果你有一个问题，这里不会给你答案，而会把你训练成一个，具备自己找到答案能力的人。」</blockquote>
+<p><strong>产品体系</strong>：课程 + 每天刻意练习打卡 + 专题训练营；写作行动营是第一个子产品。两个关键词：<strong>刻意练习</strong>、<strong>体系化成长</strong>。会员群命名 V1.0 / V1.1 / V2.0……「意思是不断迭代，不断升级」「这是一场无限游戏」。</p>
+<p><strong>价值观</strong>：</p>
+<ul><li>「成长，从来都是靠『积累』，而不是靠『方法、技巧』。」</li><li>「一个人赚到的钱，是他能力，或者说认知的变现。」→ 俱乐部只做「提升能力／认知」</li><li>「虽然做成长类社群，会比较没那么吸引人，但我们相信，这是一件正确的事情，并且是长期正确的事情，时间拉的越长，这件事越正确。」</li><li>三个合伙人每周碰面深聊一次，经常推翻之前的思路，「每次推翻自己，我都会觉得很不舒服」，但想清楚后又庆幸。</li><li>亦仁后来提醒「产品设计要借势，和风口、热点相结合」，他们也在尝试新产品——说明他并未把「不追风口」绝对化。</li></ul>
+<hr>
+
+<h1 id="第十一编-工具箱-速查">第十一编　工具箱（速查）</h1>
+<h2 id="11-1-全部-SOP-索引">11.1 全部 SOP 索引</h2>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>SOP / 方法</th><th>出处</th><th>适用场景</th></tr></thead><tbody><tr><td>1</td><td>系统拆解四步（拆点 → 单点改进 → 组合联调 → 结果）</td><td><a class="ref" href="#post-11" title="跳转到附录 A 第 11 篇">[11]</a></td><td>任何复杂目标、起新项目</td></tr><tr><td>2</td><td>因果四问</td><td><a class="ref" href="#post-13" title="跳转到附录 A 第 13 篇">[13]</a></td><td>拆掉「我本能觉得对」的判断</td></tr><tr><td>3</td><td>原理提炼三步（原理 / 找 3–5 个同类 / 找 3–5 个自用）</td><td><a class="ref" href="#post-15" title="跳转到附录 A 第 15 篇">[15]</a></td><td>看教程、看案例</td></tr><tr><td>4</td><td>归纳 + 演绎</td><td><a class="ref" href="#post-30" title="跳转到附录 A 第 30 篇">[30]</a></td><td>学任何新知识</td></tr><tr><td>5</td><td>旧元素新组合（用户 / 场景 / 需求三角度）</td><td><a class="ref" href="#post-8" title="跳转到附录 A 第 8 篇">[8]</a></td><td>找赚钱思路、做创新</td></tr><tr><td>6</td><td>四清单（需求 / 流量 / 营销 / 变现 × what·why·how）</td><td><a class="ref" href="#post-32" title="跳转到附录 A 第 32 篇">[32]</a></td><td>拆成功案例</td></tr><tr><td>7</td><td>写下来释放工作记忆</td><td><a class="ref" href="#post-18" title="跳转到附录 A 第 18 篇">[18]</a></td><td>复杂问题、焦虑</td></tr><tr><td>8</td><td>最核心因素（10 选 1，投 80% 注意力）</td><td><a class="ref" href="#post-17" title="跳转到附录 A 第 17 篇">[17]</a></td><td>决策、复盘</td></tr><tr><td>9</td><td>知行合一破惯性五步</td><td><a class="ref" href="#post-6" title="跳转到附录 A 第 6 篇">[6]</a></td><td>明明知道做不到</td></tr><tr><td>10</td><td>5 条夸张标语 + 每天看一遍</td><td><a class="ref" href="#post-6" title="跳转到附录 A 第 6 篇">[6]</a></td><td>执行力、打卡</td></tr><tr><td>11</td><td>每天 5 个成长 + 7 问复盘</td><td><a class="ref" href="#post-16" title="跳转到附录 A 第 16 篇">[16]</a></td><td>副业无正反馈期</td></tr><tr><td>12</td><td>借外部的事练自己的功（8 条）</td><td><a class="ref" href="#post-14" title="跳转到附录 A 第 14 篇">[14]</a><a class="ref" href="#post-23" title="跳转到附录 A 第 23 篇">[23]</a></td><td>上班期间练能力</td></tr><tr><td>13</td><td>执行意图「一旦 X 就做 Y」+ 打勾 + 细拆 + 奖励</td><td><a class="ref" href="#post-23" title="跳转到附录 A 第 23 篇">[23]</a></td><td>进入状态、拖延</td></tr><tr><td>14</td><td>做事前想象巨大收获</td><td><a class="ref" href="#post-24" title="跳转到附录 A 第 24 篇">[24]</a></td><td>动力不足</td></tr><tr><td>15</td><td>李笑来 8 个概念问题</td><td><a class="ref" href="#post-19" title="跳转到附录 A 第 19 篇">[19]</a></td><td>写文章前打磨概念</td></tr><tr><td>16</td><td>用户视角 7 问</td><td><a class="ref" href="#post-19" title="跳转到附录 A 第 19 篇">[19]</a></td><td>写作、做产品</td></tr><tr><td>17</td><td>宣传产品的 4 种写法</td><td><a class="ref" href="#post-17" title="跳转到附录 A 第 17 篇">[17]</a></td><td>分销、推广、拉新</td></tr><tr><td>18</td><td>65 个问题的年终复盘（健康/事业/亲密关系 × 复盘+计划）</td><td><a class="ref" href="#post-5" title="跳转到附录 A 第 5 篇">[5]</a></td><td>年度复盘</td></tr><tr><td>19</td><td>计划倒序四象限（营销 → 需求 → 流量 → 变现）</td><td><a class="ref" href="#post-31" title="跳转到附录 A 第 31 篇">[31]</a></td><td>从 0 做产品</td></tr><tr><td>20</td><td>数据是需求的抽象化 5 步</td><td><a class="ref" href="#post-35" title="跳转到附录 A 第 35 篇">[35]</a></td><td>市场分析、找卖点</td></tr><tr><td>21</td><td>MVP 四类验证（视频/文章/问卷/指数）+ 破局点</td><td><a class="ref" href="#post-70" title="跳转到附录 A 第 70 篇">[70]</a><a class="ref" href="#post-26" title="跳转到附录 A 第 26 篇">[26]</a></td><td>验证需求</td></tr><tr><td>22</td><td>信息整合找需求 4 类源头</td><td><a class="ref" href="#post-37" title="跳转到附录 A 第 37 篇">[37]</a></td><td>找低门槛项目</td></tr><tr><td>23</td><td>MECE 三类用户推演命名</td><td><a class="ref" href="#post-36" title="跳转到附录 A 第 36 篇">[36]</a></td><td>产品命名</td></tr><tr><td>24</td><td>开眼 → 复制 → 贯通</td><td><a class="ref" href="#post-42" title="跳转到附录 A 第 42 篇">[42]</a></td><td>培养赚钱思维</td></tr><tr><td>25</td><td>借别人流量 5 步</td><td><a class="ref" href="#post-39" title="跳转到附录 A 第 39 篇">[39]</a></td><td>冷启动引流</td></tr><tr><td>26</td><td>9.9 → 19.9 阶梯分销</td><td><a class="ref" href="#post-48" title="跳转到附录 A 第 48 篇">[48]</a></td><td>没流量时卖课</td></tr><tr><td>27</td><td>分钱裂变三步</td><td><a class="ref" href="#post-76" title="跳转到附录 A 第 76 篇">[76]</a></td><td>活动冷启动</td></tr><tr><td>28</td><td>春节线下 6 点框架 + 失败 4 条经验</td><td><a class="ref" href="#post-53" title="跳转到附录 A 第 53 篇">[53]</a><a class="ref" href="#post-46" title="跳转到附录 A 第 46 篇">[46]</a></td><td>线下获客</td></tr><tr><td>29</td><td>黄金圈 why→how→what 写 landing page</td><td><a class="ref" href="#post-66" title="跳转到附录 A 第 66 篇">[66]</a></td><td>转化文案</td></tr><tr><td>30</td><td>与 AI 对话 4 步循环 + 3 类 why</td><td><a class="ref" href="#post-1" title="跳转到附录 A 第 1 篇">[1]</a></td><td>AI 编程 / 学新工具</td></tr></tbody></table></div>
+<h2 id="11-2-书单-影视-概念速查">11.2 书单 / 影视 / 概念速查</h2>
+<div class="table-wrap"><table><thead><tr><th>类别</th><th>清单</th></tr></thead><tbody><tr><td>成长与认知</td><td>《通往财富自由之路》（李笑来专栏）、《原则》、《刻意练习》、《高效能人士的 7 个习惯》、《精英日课》（万维钢）、《经济发展理论》（熊彼特）、《MacTalk 人生元编程》、《写作禅》、《活好》、《大江大河》（剧）</td></tr><tr><td>情绪与修心</td><td>《正念的奇迹》《人生只有一件事》《你的生存本能正在杀死你》《大脑幸福密码》《幸福的陷阱》《每个人的战争》《轻疗愈》《次第花开》《当下的力量》《减压脑科学》《心态》《逆商》《钝感力》《焦虑症自救指南》《应对焦虑》《一平方米的静心》《跳出头脑，融入生活》《幸福的方法》《与哲学家谈快乐》《哲学的慰藉》《琅琊榜》（剧）</td></tr><tr><td>产品与商业</td><td>《影响力》《超级符号原理》《华与华正道》《增长黑客》《SEO 实战密码》《人人都是产品经理》《21 堂信息搜集课》《论语》、王阳明《心学》、阿德勒课题分离、马斯洛需求金字塔、费曼学习法、学习金字塔、金字塔原理、黄金圈法则、精益创业、MVP、PMF、三级火箭、28 定律、达克效应、复利曲线</td></tr><tr><td>影视/其他</td><td>《闻香识女人》《使徒行者》《天道》《琅琊榜》《大江大河》《塞尔达》、TED《How great leaders inspire action》</td></tr></tbody></table></div>
+<h2 id="11-3-原话金句库-逐字引用">11.3 原话金句库（逐字引用）</h2>
+<p><strong>关于赚钱</strong></p>
+<ul><li>「赚钱是结果，是做某件事情的结果。」<a class="ref" href="#post-10" title="跳转到附录 A 第 10 篇">[10]</a></li><li>「我对赚钱的认识，从一个独立的简单事件，变成一个复杂的系统。」<a class="ref" href="#post-11" title="跳转到附录 A 第 11 篇">[11]</a></li><li>「赚钱的第一性原理：一个人能赚钱，本质上是因为他创造了价值，而创造价值的核心是能力。」<a class="ref" href="#post-10" title="跳转到附录 A 第 10 篇">[10]</a></li><li>「所有的项目都能赚钱，关键看人行不行。」<a class="ref" href="#post-12" title="跳转到附录 A 第 12 篇">[12]</a></li><li>「这件事本身就是在赚钱，只是结果会显示在未来。」<a class="ref" href="#post-12" title="跳转到附录 A 第 12 篇">[12]</a></li><li>「写作和赚钱之间，只是相关性，并不是因果性。」<a class="ref" href="#post-10" title="跳转到附录 A 第 10 篇">[10]</a></li><li>「能力是因，赚钱是果。」<a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a></li><li>「交易的本质是信任。」<a class="ref" href="#post-17" title="跳转到附录 A 第 17 篇">[17]</a></li><li>「决定你价格的不是价值，而是需求。」<a class="ref" href="#post-66" title="跳转到附录 A 第 66 篇">[66]</a></li></ul>
+<p><strong>关于积累与复利</strong></p>
+<ul><li>「一切都是积累。慢就是快。」<a class="ref" href="#post-10" title="跳转到附录 A 第 10 篇">[10]</a></li><li>「复利效应是客观事实，它对每个人都是绝对公平。」<a class="ref" href="#post-7" title="跳转到附录 A 第 7 篇">[7]</a></li><li>「不符合客观规律的事情，一定不可能实现。」<a class="ref" href="#post-7" title="跳转到附录 A 第 7 篇">[7]</a></li><li>「如果一件事不能让自己得到成长，就说明它没有复利效应。」<a class="ref" href="#post-7" title="跳转到附录 A 第 7 篇">[7]</a></li><li>「积累是第一生产力，也是第一竞争力。」（《华与华正道》，<a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a> 引用）</li><li>「三年见成效的事，做出来就领先三年；十年见成效的事，做出来就领先十年。」<a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a></li><li>「一看就会，一做就废。」<a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a></li><li>「成长，从来都是靠『积累』，而不是靠『方法、技巧』。」<a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a></li></ul>
+<p><strong>关于能力与练习</strong></p>
+<ul><li>「一个人能不能做好一件事，只和一个因素有关，就是 —— 他在这件事上，刻意练习的时间、次数。」<a class="ref" href="#post-13" title="跳转到附录 A 第 13 篇">[13]</a></li><li>「换句话说，你的『天赋』是可以创造出来的。」<a class="ref" href="#post-13" title="跳转到附录 A 第 13 篇">[13]</a></li><li>「焦虑的本质原因，就是能力跟不上认知。」<a class="ref" href="#post-9" title="跳转到附录 A 第 9 篇">[9]</a></li><li>「只是『知道』没用，做到才是本事！」<a class="ref" href="#post-9" title="跳转到附录 A 第 9 篇">[9]</a></li><li>「方法在不断变化，属于海市蜃楼。追求方法，就像在追逐镜中花、水中月。」<a class="ref" href="#post-14" title="跳转到附录 A 第 14 篇">[14]</a></li><li>「搞懂原理，就是了解事物的底层逻辑，我们就能一通百通。」<a class="ref" href="#post-15" title="跳转到附录 A 第 15 篇">[15]</a></li><li>「如果你不会游泳，怎么换游泳池都没用。」<a class="ref" href="#post-15" title="跳转到附录 A 第 15 篇">[15]</a></li><li>「要选择正确的难受。」<a class="ref" href="#post-15" title="跳转到附录 A 第 15 篇">[15]</a></li><li>「不是 1 和 2，或者 1 和 10 的区别。而是 0 和 100 的区别。」<a class="ref" href="#post-6" title="跳转到附录 A 第 6 篇">[6]</a></li><li>「改变是一个需要每天做、高频做、长期做的事情。」<a class="ref" href="#post-6" title="跳转到附录 A 第 6 篇">[6]</a></li></ul>
+<p><strong>关于写作与思考</strong></p>
+<ul><li>「我在写每一篇文章的时候，都有一个原则：写自己。」<a class="ref" href="#post-17" title="跳转到附录 A 第 17 篇">[17]</a></li><li>「我们写的内容，必须自己亲自实践、经历过，并且获得了结果。」<a class="ref" href="#post-17" title="跳转到附录 A 第 17 篇">[17]</a></li><li>「对普通人而言，写作是积累这 4 种能力成本最低、最方便、最高效的手段。」<a class="ref" href="#post-19" title="跳转到附录 A 第 19 篇">[19]</a></li><li>「但从客观的事实，以及大脑生理结构上来说：不写下来，就没法思考。」<a class="ref" href="#post-18" title="跳转到附录 A 第 18 篇">[18]</a></li><li>「从某个角度来说，赚钱就是一个解决问题的过程。」<a class="ref" href="#post-18" title="跳转到附录 A 第 18 篇">[18]</a></li><li>「写作的本质是『思考』。」<a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a></li><li>「写作是一个手段，而不是目的。」<a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a></li><li>「自嗨 = 悦己，悦己才能持续。持续，就是最伟大的力量。」<a class="ref" href="#post-17" title="跳转到附录 A 第 17 篇">[17]</a></li><li>「人生其实只有一件事，就是不断的修炼自己，让自己活得越来越好。」<a class="ref" href="#post-17" title="跳转到附录 A 第 17 篇">[17]</a></li></ul>
+<p><strong>关于情绪与希望</strong></p>
+<ul><li>「最好的正反馈，从不来自外界，而是在自身。」<a class="ref" href="#post-16" title="跳转到附录 A 第 16 篇">[16]</a></li><li>「别人赚钱，是别人的课题。你没赚钱，是你的课题。」<a class="ref" href="#post-29" title="跳转到附录 A 第 29 篇">[29]</a></li><li>「盲目对比，是痛苦的最大根源之一。」<a class="ref" href="#post-29" title="跳转到附录 A 第 29 篇">[29]</a></li><li>「深入思考，可以破除一切焦虑。」<a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a></li><li>「能量比能力更重要。」<a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a></li><li>「生活中无时无刻，任何一个节点，都是你保持修炼的时机。」<a class="ref" href="#post-14" title="跳转到附录 A 第 14 篇">[14]</a></li><li>「流水不争先，争的是滔滔不绝。」<a class="ref" href="#post-22" title="跳转到附录 A 第 22 篇">[22]</a></li><li>「所谓希望，就是一个人相信自己的明天，会因为今天的努力而变得更好。」<a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a></li></ul>
+<p><strong>关于产品与用户</strong></p>
+<ul><li>「「用户需要」是「用户会买」的必要条件，不是充分条件。」<a class="ref" href="#post-31" title="跳转到附录 A 第 31 篇">[31]</a></li><li>「用户视角不是方法、技巧、技能，而是经验、是了解、是『有意识』观察的积累。」<a class="ref" href="#post-33" title="跳转到附录 A 第 33 篇">[33]</a></li><li>「数据就是需求的抽象化。」<a class="ref" href="#post-35" title="跳转到附录 A 第 35 篇">[35]</a></li><li>「想不清楚如何推广的产品，没必要做。」<a class="ref" href="#post-35" title="跳转到附录 A 第 35 篇">[35]</a></li><li>「任何一个行业，发展到某个阶段，一定会出现一种商业模式：信息整合。」<a class="ref" href="#post-37" title="跳转到附录 A 第 37 篇">[37]</a></li><li>「有人抱怨的地方，就可能做出这么一个产品。」<a class="ref" href="#post-37" title="跳转到附录 A 第 37 篇">[37]</a></li><li>「产品名字只有一个目的：降低用户认知成本。」<a class="ref" href="#post-36" title="跳转到附录 A 第 36 篇">[36]</a></li><li>「人们不是在买你的产品，人们是在买你的信念。」<a class="ref" href="#post-66" title="跳转到附录 A 第 66 篇">[66]</a></li><li>「把最 Low 的产品做到最牛。」<a class="ref" href="#post-55" title="跳转到附录 A 第 55 篇">[55]</a></li><li>「你的顿悟，有时候就是别人的基本功。」（樊登，<a class="ref" href="#post-33" title="跳转到附录 A 第 33 篇">[33]</a> 引用）</li></ul>
+<p><strong>关于 AI（2025）</strong></p>
+<ul><li>「我把自己搞丢了。」<a class="ref" href="#post-1" title="跳转到附录 A 第 1 篇">[1]</a></li><li>「我 4 小时的行动，抵过我之前大半年的折腾，并且效果好 100 倍。」<a class="ref" href="#post-1" title="跳转到附录 A 第 1 篇">[1]</a></li><li>「我把 gemini 当成，坐在我旁边的一个全知全能的顾问。」<a class="ref" href="#post-1" title="跳转到附录 A 第 1 篇">[1]</a></li><li>「忘记所有之前看过的『教程』里的『应该怎么怎么做』，一步一步，跟着 AI 去操作。」<a class="ref" href="#post-1" title="跳转到附录 A 第 1 篇">[1]</a></li></ul>
+<h2 id="11-4-避坑清单-跨帖归纳">11.4 避坑清单（跨帖归纳）</h2>
+<ol><li><strong>照抄教程</strong>：不存在一字不差照做就成功的教程，因为「没有两个完全相同的人」。<a class="ref" href="#post-15" title="跳转到附录 A 第 15 篇">[15]</a></li><li><strong>追项目 / 追风口</strong>：「这件事的核心，从来不是找什么项目，而是我自己的基础太差了。」<a class="ref" href="#post-12" title="跳转到附录 A 第 12 篇">[12]</a></li><li><strong>急于求成</strong>：墙上贴「1 天上不会掉馅饼 2 这件事情我有能力做好吗？」<a class="ref" href="#post-10" title="跳转到附录 A 第 10 篇">[10]</a></li><li><strong>越级研究</strong>：没做过 0→1，就别整天研究别人年赚百万千万的案例。<a class="ref" href="#post-38" title="跳转到附录 A 第 38 篇">[38]</a></li><li><strong>用上班思维做副业</strong>：副业收入是复利曲线，前半年甚至一年没钱很正常。<a class="ref" href="#post-16" title="跳转到附录 A 第 16 篇">[16]</a></li><li><strong>把正反馈押在外界</strong>：涨粉、赞赏、变现一不来就放弃 → 浅尝辄止 → 习得性无助。<a class="ref" href="#post-16" title="跳转到附录 A 第 16 篇">[16]</a></li><li><strong>朋友圈做用户调研</strong>：小样本 + 冲动型答案，应去 UGC 平台看公开数据。<a class="ref" href="#post-35" title="跳转到附录 A 第 35 篇">[35]</a></li><li><strong>先做产品再找卖点</strong>：应先数据挖需求、先定购买理由。<a class="ref" href="#post-35" title="跳转到附录 A 第 35 篇">[35]</a><a class="ref" href="#post-31" title="跳转到附录 A 第 31 篇">[31]</a></li><li><strong>免费线下活动</strong>：没有门槛会被当骗子；还要有裂变和留存理由。<a class="ref" href="#post-46" title="跳转到附录 A 第 46 篇">[46]</a></li><li><strong>求点赞换奖励</strong>：关系好的直接点赞不点开，弄巧成拙；不如把标题写好。<a class="ref" href="#post-73" title="跳转到附录 A 第 73 篇">[73]</a></li><li><strong>傲慢</strong>：「阻碍赚钱的，不是无知，是傲慢」；「因为无知产生的傲慢」。<a class="ref" href="#post-32" title="跳转到附录 A 第 32 篇">[32]</a><a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a></li><li><strong>病急乱投医</strong>：百度「神药」、偏方、私自停药——他走了十几年的弯路。<a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a></li><li><strong>工具迷信</strong>：「如果实现目标的影响因素有 100 个，工具最多占到 1。」<a class="ref" href="#post-24" title="跳转到附录 A 第 24 篇">[24]</a></li><li><strong>只看干货的两个坏处</strong>：事情做不成 + 干货学不完（无底洞）。<a class="ref" href="#post-15" title="跳转到附录 A 第 15 篇">[15]</a></li><li><strong>写作社群承诺变现</strong>：写作与变现没有必然因果，承诺了就没有底气。<a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a></li><li><strong>公众号单点依赖</strong>：根源老师提醒「你现在只有主业，没有副业，这个系统不够稳定」。<a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a></li></ol>
+<h2 id="11-5-30-天实践路线-整理者推导-非作者原话">11.5 30 天实践路线（★ 整理者推导，非作者原话）</h2>
+<blockquote>以下为<strong>基于其体系整理的入门路线</strong>，用于把手册转成行动。作者本人没有发布过「30 天计划」，此处每一步都标注了对应的原帖依据，便于回溯核查。</blockquote>
+<div class="table-wrap"><table><thead><tr><th>阶段</th><th>天数</th><th>动作</th><th>依据</th></tr></thead><tbody><tr><td>定位</td><td>1–2</td><td>用「因果四问」写下自己最想做成的一件事；用系统拆解列出全部影响因素</td><td><a class="ref" href="#post-13" title="跳转到附录 A 第 13 篇">[13]</a><a class="ref" href="#post-11" title="跳转到附录 A 第 11 篇">[11]</a></td></tr><tr><td>定位</td><td>3</td><td>用「最核心因素思维」从因素里选出 1 个，写下为什么是它</td><td><a class="ref" href="#post-17" title="跳转到附录 A 第 17 篇">[17]</a></td></tr><tr><td>建基线</td><td>4–7</td><td>每天写 300–500 字，只写自己真实做过的事；同时记录「今天 5 个成长」</td><td><a class="ref" href="#post-17" title="跳转到附录 A 第 17 篇">[17]</a><a class="ref" href="#post-16" title="跳转到附录 A 第 16 篇">[16]</a></td></tr><tr><td>建基线</td><td>8–10</td><td>挑一个思维模型（如「因为…所以…」或「为什么…」），每天刻意练 1 遍并写下来</td><td><a class="ref" href="#post-18" title="跳转到附录 A 第 18 篇">[18]</a><a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a></td></tr><tr><td>破惯性</td><td>11–20</td><td>把最需要的一条原则写成夸张标语贴在眼前，每天看 + 做一次；每 5 分钟复习法按需使用</td><td><a class="ref" href="#post-6" title="跳转到附录 A 第 6 篇">[6]</a></td></tr><tr><td>破惯性</td><td>全程</td><td>屏蔽产生坏惯性的信息源，进入一个好惯性的环境</td><td><a class="ref" href="#post-6" title="跳转到附录 A 第 6 篇">[6]</a></td></tr><tr><td>练能力</td><td>21–25</td><td>选一个真实案例，用四清单（需求/流量/营销/变现 × what·why·how）拆一遍</td><td><a class="ref" href="#post-32" title="跳转到附录 A 第 32 篇">[32]</a></td></tr><tr><td>练能力</td><td>26–28</td><td>用「原理三步」把这个案例的方法迁移到自己的事上，各找 3–5 个落点</td><td><a class="ref" href="#post-15" title="跳转到附录 A 第 15 篇">[15]</a><a class="ref" href="#post-8" title="跳转到附录 A 第 8 篇">[8]</a></td></tr><tr><td>复盘</td><td>29–30</td><td>用 7 问复盘 + 65 问框架里与健康/事业/关系相关的部分做一次复盘，定下一轮 30 天</td><td><a class="ref" href="#post-16" title="跳转到附录 A 第 16 篇">[16]</a><a class="ref" href="#post-5" title="跳转到附录 A 第 5 篇">[5]</a></td></tr><tr><td>底层</td><td>全程</td><td>每天锻炼 1 小时、早睡、情绪波动时写下全部想法</td><td><a class="ref" href="#post-4" title="跳转到附录 A 第 4 篇">[4]</a><a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a><a class="ref" href="#post-18" title="跳转到附录 A 第 18 篇">[18]</a></td></tr></tbody></table></div>
+<hr>
+
+<h1 id="附录">附录</h1>
+<h2 id="附录-A-77-篇帖子全索引">附录 A　77 篇帖子全索引</h2>
+<p>下表按发帖时间倒序排列，点击标题可打开原帖。主题与体量为本次深度阅读后的归类，「外链」表示正文主要为外部链接、完整内容不在星球帖内。</p>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>日期</th><th>标题</th><th>主题</th><th>体量</th><th>精华</th><th>赞/评/藏/阅</th></tr></thead><tbody><tr id="post-1"><td>1</td><td>2025-10-22</td><td><a href="https://scys.com/articleDetail/xq_topic/45811458854555428" target="_blank" rel="noopener">用 gemini 4小时做出 1 个APP后，我对AI 编程从绝望变为自信，你也可以。</a></td><td>AI与工具</td><td>长文</td><td>★</td><td>153/17/37/13078</td></tr><tr id="post-2"><td>2</td><td>2025-08-11</td><td><a href="https://scys.com/articleDetail/xq_topic/1524815584511552" target="_blank" rel="noopener">天大地大，吃饭最大</a></td><td>健康与生活习惯</td><td>碎片</td><td></td><td>0/0/1/10</td></tr><tr id="post-3"><td>3</td><td>2025-04-29</td><td><a href="https://scys.com/articleDetail/xq_topic/1524485112518222" target="_blank" rel="noopener">今天来参加生财线下聚会，胖虎哥带我们在杭州师范大学逛了一圈</a></td><td>社群与关系</td><td>碎片</td><td></td><td>11/0/0/932</td></tr><tr id="post-4"><td>4</td><td>2025-03-13</td><td><a href="https://scys.com/articleDetail/xq_topic/8858118448241152" target="_blank" rel="noopener">每天锻炼1小时，一年多赚20万</a></td><td>健康与生活习惯</td><td>碎片</td><td></td><td>90/6/2/1230</td></tr><tr id="post-5"><td>5</td><td>2024-12-27</td><td><a href="https://scys.com/articleDetail/xq_topic/2858442541441451" target="_blank" rel="noopener">《用这65个问题，做一个完美的2024年终复盘吧！》</a></td><td>执行与复盘</td><td>长文</td><td></td><td>43/4/5/3992</td></tr><tr id="post-6"><td>6</td><td>2024-12-13</td><td><a href="https://scys.com/articleDetail/xq_topic/1525142512445812" target="_blank" rel="noopener">《如何在赚钱这件事上，做到知行合一？》</a></td><td>执行与复盘</td><td>长文</td><td>★</td><td>319/47/52/19498</td></tr><tr id="post-7"><td>7</td><td>2024-11-01</td><td><a href="https://scys.com/articleDetail/xq_topic/5121544221225184" target="_blank" rel="noopener">《理解赚钱的复利效应，你的成长会加速 10 倍！》</a></td><td>认知与信念</td><td>长文</td><td></td><td>77/5/6/8352</td></tr><tr id="post-8"><td>8</td><td>2024-10-25</td><td><a href="https://scys.com/articleDetail/xq_topic/4848524111511458" target="_blank" rel="noopener">《如何参考其他行业的成熟套路，拓展出更多赚钱思路？》</a></td><td>产品与用户需求</td><td>长文</td><td>★</td><td>136/8/9/18263</td></tr><tr id="post-9"><td>9</td><td>2024-09-13</td><td><a href="https://scys.com/articleDetail/xq_topic/5121188121252154" target="_blank" rel="noopener">《普通人赚钱会经历的 3 个阶段：从自负，到自我怀疑，到自信。》</a></td><td>认知与信念</td><td>长文</td><td></td><td>36/4/0/4630</td></tr><tr id="post-10"><td>10</td><td>2024-09-06</td><td><a href="https://scys.com/articleDetail/xq_topic/4844125215148588" target="_blank" rel="noopener">《赚钱急于求成的心态，该如何破除？》</a></td><td>认知与信念</td><td>中等</td><td>★</td><td>130/7/6/9177</td></tr><tr id="post-11"><td>11</td><td>2024-08-30</td><td><a href="https://scys.com/articleDetail/xq_topic/2855145188188121" target="_blank" rel="noopener">《赚钱不是独立的事件，而是复杂的系统》</a></td><td>赚钱系统</td><td>长文</td><td></td><td>81/1/2/7249</td></tr><tr id="post-12"><td>12</td><td>2024-08-23</td><td><a href="https://scys.com/articleDetail/xq_topic/1522848248258182" target="_blank" rel="noopener">赚钱这件事上，我们该如何以终为始设计自己的未来？</a></td><td>认知与信念</td><td>长文</td><td></td><td>154/8/1/11121</td></tr><tr id="post-13"><td>13</td><td>2024-08-16</td><td><a href="https://scys.com/articleDetail/xq_topic/4844182188245228" target="_blank" rel="noopener">决定你能否赚钱的不是优势，而是刻意练习的次数！</a></td><td>学习与成长</td><td>长文</td><td></td><td>89/16/1/7209</td></tr><tr id="post-14"><td>14</td><td>2024-08-09</td><td><a href="https://scys.com/articleDetail/xq_topic/5122815281514514" target="_blank" rel="noopener">王阳明教会我，如何提高 10 倍赚钱效率？</a></td><td>学习与成长</td><td>长文</td><td></td><td>96/7/1/7363</td></tr><tr id="post-15"><td>15</td><td>2024-08-02</td><td><a href="https://scys.com/articleDetail/xq_topic/5122812148158824" target="_blank" rel="noopener">搞懂赚钱方法背后的原理，你就能一通百通</a></td><td>认知与信念</td><td>长文</td><td></td><td>67/6/0/7181</td></tr><tr id="post-16"><td>16</td><td>2024-07-26</td><td><a href="https://scys.com/articleDetail/xq_topic/5122488888414154" target="_blank" rel="noopener">参加生财航海收益少不想做了，如何调整心态？</a></td><td>情绪与能量</td><td>长文</td><td>★</td><td>223/17/5/18883</td></tr><tr id="post-17"><td>17</td><td>2024-04-15</td><td><a href="https://scys.com/articleDetail/xq_topic/5122512245114154" target="_blank" rel="noopener">《7 年生财拉新 1100 +，我只做对了一件事》</a></td><td>写作与思考</td><td>长文</td><td></td><td>121/13/1/8963</td></tr><tr id="post-18"><td>18</td><td>2024-04-01</td><td><a href="https://scys.com/articleDetail/xq_topic/5122185844482284" target="_blank" rel="noopener">《当思考成为习惯，赚钱会更容易》</a></td><td>写作与思考</td><td>长文</td><td></td><td>211/19/0/10279</td></tr><tr id="post-19"><td>19</td><td>2024-03-22</td><td><a href="https://scys.com/articleDetail/xq_topic/4844821212258128" target="_blank" rel="noopener">《详解：写作和赚钱的 4 个关系！看完你一定会忍不住想开始写！》</a></td><td>写作与思考</td><td>长文</td><td>★</td><td>614/74/14/37067</td></tr><tr id="post-20"><td>20</td><td>2023-10-23</td><td><a href="https://scys.com/articleDetail/xq_topic/411581151454258" target="_blank" rel="noopener">《身体残疾卧床 3 年，我在人生最低谷加入生财有术，有哪些成长？》</a></td><td>人物经历与价值观</td><td>长文</td><td>★</td><td>1455/287/46/24824</td></tr><tr id="post-21"><td>21</td><td>2021-12-13</td><td><a href="https://scys.com/articleDetail/xq_topic/185581588525452" target="_blank" rel="noopener">《2883 人向朋友介绍生财有术时，说的最多是 16 个词！》</a></td><td>社群与关系</td><td>长文</td><td>★</td><td>134/16/2/11634</td></tr><tr id="post-22"><td>22</td><td>2021-10-28</td><td><a href="https://scys.com/articleDetail/xq_topic/581118241541584" target="_blank" rel="noopener">嘉宾问答｜想去更好的公司，我该如何利用好时间？</a></td><td>学习与成长</td><td>长文</td><td>★</td><td>202/14/2/14765</td></tr><tr id="post-23"><td>23</td><td>2021-10-13</td><td><a href="https://scys.com/articleDetail/xq_topic/581111421285554" target="_blank" rel="noopener">解决早上到公司难进入工作状态，可从内、外两方面入手</a></td><td>执行与复盘</td><td>中等</td><td></td><td>165/11/1/8913</td></tr><tr id="post-24"><td>24</td><td>2021-09-26</td><td><a href="https://scys.com/articleDetail/xq_topic/185528541128522" target="_blank" rel="noopener">提高执行力，要多模仿高手拆解任务，做事前想象巨大收获</a></td><td>执行与复盘</td><td>中等</td><td></td><td>101/12/3/8514</td></tr><tr id="post-25"><td>25</td><td>2021-05-25</td><td><a href="https://scys.com/articleDetail/xq_topic/414114582241558" target="_blank" rel="noopener">抖音的搜索，可以搜到视频中的语音，SEO可以布局了</a></td><td>流量与增长</td><td>碎片</td><td></td><td>25/3/0/237</td></tr><tr id="post-26"><td>26</td><td>2021-04-17</td><td><a href="https://scys.com/articleDetail/xq_topic/215288852421451" target="_blank" rel="noopener">《复盘｜亦仁 3 年前的帖子，帮我每月被动收入 1 万块》</a></td><td>案例拆解</td><td>长文</td><td>★</td><td>292/27/11/20246</td></tr><tr id="post-27"><td>27</td><td>2021-04-15</td><td><a href="https://scys.com/articleDetail/xq_topic/815285154842542" target="_blank" rel="noopener">随便聊聊（早睡早起）</a></td><td>健康与生活习惯</td><td>碎片</td><td></td><td>8/1/0/518</td></tr><tr id="post-28"><td>28</td><td>2020-12-16</td><td><a href="https://scys.com/articleDetail/xq_topic/582125288215284" target="_blank" rel="noopener">5000字深度拆解：Manchuan公众号2个月涨粉百万，普通人如何复制？</a></td><td>流量与增长</td><td>外链</td><td>★</td><td>125/12/4/5185</td></tr><tr id="post-29"><td>29</td><td>2020-08-25</td><td><a href="https://scys.com/articleDetail/xq_topic/815552111115822" target="_blank" rel="noopener">专注自己的课题，不用焦虑</a></td><td>情绪与能量</td><td>中等</td><td></td><td>77/13/1/3354</td></tr><tr id="post-30"><td>30</td><td>2020-07-21</td><td><a href="https://scys.com/articleDetail/xq_topic/118818854252482" target="_blank" rel="noopener">学习和赚钱是什么关系？</a></td><td>学习与成长</td><td>长文</td><td>★</td><td>370/27/6/3716</td></tr><tr id="post-31"><td>31</td><td>2020-05-15</td><td><a href="https://scys.com/articleDetail/xq_topic/548824821414424" target="_blank" rel="noopener">如何为某个细分领域用户提供产品并赚钱</a></td><td>产品与用户需求</td><td>长文</td><td>★</td><td>185/26/3/—</td></tr><tr id="post-32"><td>32</td><td>2020-04-11</td><td><a href="https://scys.com/articleDetail/xq_topic/118511118582252" target="_blank" rel="noopener">如何通过分析成功案例，帮自己建立赚钱清单</a></td><td>案例拆解</td><td>长文</td><td>★</td><td>644/53/12/—</td></tr><tr id="post-33"><td>33</td><td>2020-01-20</td><td><a href="https://scys.com/articleDetail/xq_topic/241855525211821" target="_blank" rel="noopener">我的2019：普通人如何培养自己的用户视角？</a></td><td>人物经历与价值观</td><td>长文</td><td>★</td><td>159/15/2/—</td></tr><tr id="post-34"><td>34</td><td>2020-01-15</td><td><a href="https://scys.com/articleDetail/xq_topic/118288481255482" target="_blank" rel="noopener">产品想要获得更大收益，应该不断向用户的真实需求靠近</a></td><td>产品与用户需求</td><td>中等</td><td>★</td><td>73/8/1/—</td></tr><tr id="post-35"><td>35</td><td>2019-10-15</td><td><a href="https://scys.com/articleDetail/xq_topic/841582842214252" target="_blank" rel="noopener">数据是需求的抽象化｜帮你快速找到 100 个赚钱思路</a></td><td>产品与用户需求</td><td>长文</td><td>★</td><td>293/34/5/—</td></tr><tr id="post-36"><td>36</td><td>2019-08-31</td><td><a href="https://scys.com/articleDetail/xq_topic/422111822224818" target="_blank" rel="noopener">产品名字，只有一个目的：降低用户认知成本</a></td><td>产品与用户需求</td><td>中等</td><td>★</td><td>103/15/1/—</td></tr><tr id="post-37"><td>37</td><td>2019-07-15</td><td><a href="https://scys.com/articleDetail/xq_topic/422124285425548" target="_blank" rel="noopener">信息整合：一个可复用，低门槛的成熟商业模式</a></td><td>商业模式与变现</td><td>中等</td><td>★</td><td>289/37/9/—</td></tr><tr id="post-38"><td>38</td><td>2019-07-11</td><td><a href="https://scys.com/articleDetail/xq_topic/844145541882282" target="_blank" rel="noopener">做自己擅长的事，把技能树打通，然后再去赚钱</a></td><td>学习与成长</td><td>中等</td><td>★</td><td>315/22/5/—</td></tr><tr id="post-39"><td>39</td><td>2019-05-17</td><td><a href="https://scys.com/articleDetail/xq_topic/844185252428412" target="_blank" rel="noopener">可复制，零门槛｜如何借别人的流量，打造一个稳定的被动收入系统</a></td><td>流量与增长</td><td>中等</td><td>★</td><td>275/55/2/—</td></tr><tr id="post-40"><td>40</td><td>2019-05-05</td><td><a href="https://scys.com/articleDetail/xq_topic/422142148851848" target="_blank" rel="noopener">公众号和抖音之间的赚钱机会</a></td><td>流量与增长</td><td>中等</td><td>★</td><td>113/37/1/—</td></tr><tr id="post-41"><td>41</td><td>2019-04-22</td><td><a href="https://scys.com/articleDetail/xq_topic/422211451542128" target="_blank" rel="noopener">生财有术第 3 期，我是如何做到邀请 245 个用户的？</a></td><td>流量与增长</td><td>长文</td><td>★</td><td>172/46/2/—</td></tr><tr id="post-42"><td>42</td><td>2019-04-20</td><td><a href="https://scys.com/articleDetail/xq_topic/544484848241154" target="_blank" rel="noopener">在生财有术，普通人如何从 0 到 1，培养赚钱思维</a></td><td>学习与成长</td><td>长文</td><td>★</td><td>427/67/3/—</td></tr><tr id="post-43"><td>43</td><td>2018-10-12</td><td><a href="https://scys.com/articleDetail/xq_topic/15154184554842" target="_blank" rel="noopener">看到一个网站，是做 mac 软件下载的付费网站</a></td><td>商业模式与变现</td><td>中等</td><td></td><td>22/6/0/—</td></tr><tr id="post-44"><td>44</td><td>2018-07-08</td><td><a href="https://scys.com/articleDetail/xq_topic/48525558484428" target="_blank" rel="noopener">前天晚上，涛哥在微信上和我聊天，让我受益匪浅</a></td><td>AI与工具</td><td>中等</td><td></td><td>25/7/0/—</td></tr><tr id="post-45"><td>45</td><td>2018-04-21</td><td><a href="https://scys.com/articleDetail/xq_topic/48588242152888" target="_blank" rel="noopener">36 个小而美赚钱项目之一：蛋黄酥白皮书</a></td><td>案例拆解</td><td>中等</td><td>★</td><td>104/15/2/—</td></tr><tr id="post-46"><td>46</td><td>2018-04-21</td><td><a href="https://scys.com/articleDetail/xq_topic/48588242145818" target="_blank" rel="noopener">今年春节，我在老家做了一次线下流量的测试，最终惨淡收场</a></td><td>流量与增长</td><td>中等</td><td></td><td>6/6/0/—</td></tr><tr id="post-47"><td>47</td><td>2018-04-21</td><td><a href="https://scys.com/articleDetail/xq_topic/15455124255242" target="_blank" rel="noopener">公众号发非原创兑换码，破阅读记录 7000+</a></td><td>流量与增长</td><td>中等</td><td></td><td>21/6/0/—</td></tr><tr id="post-48"><td>48</td><td>2018-04-21</td><td><a href="https://scys.com/articleDetail/xq_topic/48588248212588" target="_blank" rel="noopener">如何几乎零成本做到 1w 多付费学员？</a></td><td>流量与增长</td><td>中等</td><td>★</td><td>65/15/2/—</td></tr><tr id="post-49"><td>49</td><td>2018-04-18</td><td><a href="https://scys.com/articleDetail/xq_topic/28288284582141" target="_blank" rel="noopener">大佬们好，我是明白（自我介绍＋生财第一期系统复盘）</a></td><td>人物经历与价值观</td><td>碎片</td><td></td><td>37/6/0/—</td></tr><tr id="post-50"><td>50</td><td>2018-04-08</td><td><a href="https://scys.com/articleDetail/xq_topic/51512188245824" target="_blank" rel="noopener">分享一下，抓取其他微信号的方式，而且是精准粉</a></td><td>AI与工具</td><td>中等</td><td>★</td><td>77/8/1/—</td></tr><tr id="post-51"><td>51</td><td>2018-03-05</td><td><a href="https://scys.com/articleDetail/xq_topic/51188211452524" target="_blank" rel="noopener">（问答）新进来的朋友也可以看历史所有内容并互动</a></td><td>社群与关系</td><td>碎片</td><td></td><td>2/6/0/—</td></tr><tr id="post-52"><td>52</td><td>2018-02-05</td><td><a href="https://scys.com/articleDetail/xq_topic/28818144511221" target="_blank" rel="noopener">上次有个圈友说抖音视频的评论下找微信号的思路</a></td><td>流量与增长</td><td>中等</td><td></td><td>7/0/0/—</td></tr><tr id="post-53"><td>53</td><td>2018-01-22</td><td><a href="https://scys.com/articleDetail/xq_topic/48825284184848" target="_blank" rel="noopener">各位大佬，春节 7 天长假该怎么过</a></td><td>流量与增长</td><td>长文</td><td></td><td>9/2/0/—</td></tr><tr id="post-54"><td>54</td><td>2017-12-05</td><td><a href="https://scys.com/articleDetail/xq_topic/28821814882841" target="_blank" rel="noopener">一款软件，webscraper，帮助非技术领域的朋友做到爬虫可以做的事情</a></td><td>人物经历与价值观</td><td>长文</td><td>★</td><td>137/252/1/—</td></tr><tr id="post-55"><td>55</td><td>2017-10-15</td><td><a href="https://scys.com/articleDetail/xq_topic/51114424248284" target="_blank" rel="noopener">做产品时，你该花至少 80% 的时间去研究用户</a></td><td>产品与用户需求</td><td>碎片</td><td></td><td>3/5/0/—</td></tr><tr id="post-56"><td>56</td><td>2017-10-14</td><td><a href="https://scys.com/articleDetail/xq_topic/28884458454111" target="_blank" rel="noopener">这个小程序要火，好玩，有趣</a></td><td>碎片随想</td><td>碎片</td><td></td><td>3/8/0/—</td></tr><tr id="post-57"><td>57</td><td>2017-10-12</td><td><a href="https://scys.com/articleDetail/xq_topic/88884215851182" target="_blank" rel="noopener">（纯链接分享，正文为空）</a></td><td>碎片随想</td><td>碎片</td><td></td><td>8/1/0/—</td></tr><tr id="post-58"><td>58</td><td>2017-10-07</td><td><a href="https://scys.com/articleDetail/xq_topic/88884254511442" target="_blank" rel="noopener">得到的新商品形式：199 专栏摘出 4.99 卖近 3 万份</a></td><td>商业模式与变现</td><td>中等</td><td></td><td>11/8/0/—</td></tr><tr id="post-59"><td>59</td><td>2017-10-02</td><td><a href="https://scys.com/articleDetail/xq_topic/51114245822554" target="_blank" rel="noopener">都说生意不好做，其实变个思路，换个脑子</a></td><td>碎片随想</td><td>碎片</td><td></td><td>12/2/0/—</td></tr><tr id="post-60"><td>60</td><td>2017-09-30</td><td><a href="https://scys.com/articleDetail/xq_topic/28884528885251" target="_blank" rel="noopener">一个测试游戏，思考五秒给答案（认知偏差小测试）</a></td><td>认知与信念</td><td>中等</td><td></td><td>1/8/0/—</td></tr><tr id="post-61"><td>61</td><td>2017-09-28</td><td><a href="https://scys.com/articleDetail/xq_topic/51114225882824" target="_blank" rel="noopener">底层用户生态：深度分层化变现（故事＋数据）</a></td><td>产品与用户需求</td><td>碎片</td><td></td><td>4/3/0/—</td></tr><tr id="post-62"><td>62</td><td>2017-09-26</td><td><a href="https://scys.com/articleDetail/xq_topic/88882112511512" target="_blank" rel="noopener">知识付费是个后验产品</a></td><td>商业模式与变现</td><td>碎片</td><td></td><td>1/3/0/—</td></tr><tr id="post-63"><td>63</td><td>2017-09-24</td><td><a href="https://scys.com/articleDetail/xq_topic/88882145414112" target="_blank" rel="noopener">这几天正在看《影响力》这本书（线下手机店线上化思路）</a></td><td>流量与增长</td><td>中等</td><td></td><td>12/21/0/—</td></tr><tr id="post-64"><td>64</td><td>2017-09-21</td><td><a href="https://scys.com/articleDetail/xq_topic/51115812855544" target="_blank" rel="noopener">昨晚看《使徒行者》来的灵感：加密内容付费解密小程序</a></td><td>产品与用户需求</td><td>中等</td><td></td><td>5/8/0/—</td></tr><tr id="post-65"><td>65</td><td>2017-09-16</td><td><a href="https://scys.com/articleDetail/xq_topic/51115554882854" target="_blank" rel="noopener">来搜狐新闻，赢取 iPhone8（蹭热点裂变拆解）</a></td><td>流量与增长</td><td>中等</td><td></td><td>6/0/0/—</td></tr><tr id="post-66"><td>66</td><td>2017-09-12</td><td><a href="https://scys.com/articleDetail/xq_topic/28882258128541" target="_blank" rel="noopener">如何写出高转化率的 landing page（黄金圈法则）</a></td><td>写作与思考</td><td>中等</td><td></td><td>6/5/0/—</td></tr><tr id="post-67"><td>67</td><td>2017-09-12</td><td><a href="https://scys.com/articleDetail/xq_topic/88882258482452" target="_blank" rel="noopener">刚才亦仁说的语录系列，都可以做成轻便小程序</a></td><td>碎片随想</td><td>碎片</td><td></td><td>3/6/0/—</td></tr><tr id="post-68"><td>68</td><td>2017-09-03</td><td><a href="https://scys.com/articleDetail/xq_topic/48888125858848" target="_blank" rel="noopener">（正文为空）</a></td><td>碎片随想</td><td>碎片</td><td></td><td>7/0/0/—</td></tr><tr id="post-69"><td>69</td><td>2017-08-27</td><td><a href="https://scys.com/articleDetail/xq_topic/48888528541828" target="_blank" rel="noopener">（正文为空）</a></td><td>碎片随想</td><td>碎片</td><td></td><td>2/2/0/—</td></tr><tr id="post-70"><td>70</td><td>2017-08-22</td><td><a href="https://scys.com/articleDetail/xq_topic/88888818412542" target="_blank" rel="noopener">昨天《生财小报》的那篇精益创业</a></td><td>产品与用户需求</td><td>长文</td><td></td><td>11/2/0/—</td></tr><tr id="post-71"><td>71</td><td>2017-08-17</td><td><a href="https://scys.com/articleDetail/xq_topic/88888558514412" target="_blank" rel="noopener">吴军《硅谷来信》：娱乐至死与注意力</a></td><td>流量与增长</td><td>中等</td><td></td><td>9/1/0/—</td></tr><tr id="post-72"><td>72</td><td>2017-08-15</td><td><a href="https://scys.com/articleDetail/xq_topic/88885142418542" target="_blank" rel="noopener">微信读书一周 130 小时：薅羊毛的机制漏洞</a></td><td>商业模式与变现</td><td>中等</td><td></td><td>6/8/0/—</td></tr><tr id="post-73"><td>73</td><td>2017-08-08</td><td><a href="https://scys.com/articleDetail/xq_topic/51112441224844" target="_blank" rel="noopener">朋友圈分享求点赞，对发起方有何益处</a></td><td>流量与增长</td><td>中等</td><td></td><td>6/8/0/—</td></tr><tr id="post-74"><td>74</td><td>2017-07-21</td><td><a href="https://scys.com/articleDetail/xq_topic/28885511584121" target="_blank" rel="noopener">亦仁组织的「小密圈值得加」活动：升级朋友圈</a></td><td>社群与关系</td><td>中等</td><td></td><td>8/0/0/—</td></tr><tr id="post-75"><td>75</td><td>2017-07-19</td><td><a href="https://scys.com/articleDetail/xq_topic/48841124814158" target="_blank" rel="noopener">我要推荐一个小密圈（文艺版推荐理由）</a></td><td>社群与关系</td><td>碎片</td><td></td><td>10/4/0/—</td></tr><tr id="post-76"><td>76</td><td>2017-07-18</td><td><a href="https://scys.com/articleDetail/xq_topic/15528828124142" target="_blank" rel="noopener">一个零成本为公众号增粉并高转化付费社群、再转小密圈的案例</a></td><td>案例拆解</td><td>长文</td><td>★</td><td>107/8/3/—</td></tr><tr id="post-77"><td>77</td><td>2017-05-25</td><td><a href="https://scys.com/articleDetail/xq_topic/51285444255544" target="_blank" rel="noopener">有理财方面的高手吗（保险收益率求辨析）</a></td><td>碎片随想</td><td>碎片</td><td></td><td>2/7/0/—</td></tr></tbody></table></div>
+<h2 id="附录-B-数字口径与核实说明">附录 B　数字口径与核实说明</h2>
+<p>用户若要引用数字，以下几处需留意（本手册按原文保留，不作事实背书）：</p>
+<ol><li><strong>生财创建 / 加入时间</strong>：第 <a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a> 篇原帖正文开头写「2016 年 3 月 22 日，生财有术正式创建第 1 天」，但同一篇的飞书全文写「2017 年 3 月 22 日」；第 <a class="ref" href="#post-19" title="跳转到附录 A 第 19 篇">[19]</a> 篇发布于 2024-03-22 并明确写「今天是我加入生财有术 7 周年」。2017→2024 正好 7 年，故<strong>以 2017 年为准</strong>，原帖「2016」疑为笔误。另有 <a class="ref" href="#post-10" title="跳转到附录 A 第 10 篇">[10]</a><a class="ref" href="#post-12" title="跳转到附录 A 第 12 篇">[12]</a> 自述「2017 年加入生财有术」可佐证。</li><li><strong>邀请人数是不同口径</strong>：1100+（<a class="ref" href="#post-17" title="跳转到附录 A 第 17 篇">[17]</a>，第 2 期至第 7 期累计）／「不下 1000 个用户」（<a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a> 自传粗略估计）／245 人（<a class="ref" href="#post-41" title="跳转到附录 A 第 41 篇">[41]</a>，2019 年第 3 期单期）／440+、468、480 人（<a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a><a class="ref" href="#post-17" title="跳转到附录 A 第 17 篇">[17]</a><a class="ref" href="#post-7" title="跳转到附录 A 第 7 篇">[7]</a>，2021 年 418 单期，不同帖分别表述）。<strong>累计 ≠ 单期</strong>，不宜混用。</li><li><strong>日更天数随发帖时间递增</strong>：1200+（<a class="ref" href="#post-20" title="跳转到附录 A 第 20 篇">[20]</a>，2023-10）／1300+（<a class="ref" href="#post-17" title="跳转到附录 A 第 17 篇">[17]</a><a class="ref" href="#post-18" title="跳转到附录 A 第 18 篇">[18]</a>，2024）／1600+（<a class="ref" href="#post-6" title="跳转到附录 A 第 6 篇">[6]</a><a class="ref" href="#post-19" title="跳转到附录 A 第 19 篇">[19]</a>，2024–2025）。属正常增长，非矛盾。</li><li><strong>20 万 / 100 万 / 7 位数</strong>：20 万指 2021-04-18 当晚佣金＋龙珠；「变现 100 多万」指日更 600 多天累计；「7 位数」泛指广告、带货、课程、社群合计。三者口径不同。</li><li><strong>每月被动收入 1 万</strong>：指 2019 年知识星球分销网站稳定期，原帖已自注「2023 年因为一些原因，网页已停止运营」，不是当前状态。</li><li><strong>阅读数缺失</strong>：2019 年 5 月之前的帖子，接口返回的 <code>readingCount</code> 多为 0，属统计字段缺失，<strong>不能据此判断这些帖子没人看</strong>；判断早期影响力请用点赞、评论、赞赏数。</li><li><strong>精华数口径</strong>：主页统计为 30 篇精华，但列表检索里早期帖 <code>isDigested=1</code> 的比例极高（2017–2019 多数长帖都被标记），两者统计口径不同，本手册索引如实保留检索返回值。</li><li><strong>量化修辞</strong>：「一年多赚 20 万」「减少 30% 焦虑」「提高 10 倍效率」「效果好 100 倍」「100% 都获得结果」等，多为作者用于说理或自我激励的量化表达（<a class="ref" href="#post-6" title="跳转到附录 A 第 6 篇">[6]</a> 明确解释标语「必须夸张」），不是可验证统计数据。</li></ol>
+<h2 id="附录-C-原帖全文存档说明">附录 C　原帖全文存档说明</h2>
+<div class="table-wrap"><table><thead><tr><th>文件</th><th>覆盖编号</th><th>说明</th></tr></thead><tbody><tr><td><code>01-原帖全文/batch-1.md</code></td><td>1–10</td><td>2024–2025 认知、心态、AI，多为飞书长文</td></tr><tr><td><code>01-原帖全文/batch-2.md</code></td><td>11–19</td><td>2024 系统、刻意练习、写作</td></tr><tr><td><code>01-原帖全文/batch-2b.md</code></td><td>20</td><td>★ 4 万字自传长文，全站最高互动</td></tr><tr><td><code>01-原帖全文/batch-3.md</code></td><td>21–30</td><td>2020–2021 学习、执行、案例、复盘</td></tr><tr><td><code>01-原帖全文/batch-4.md</code></td><td>31–40</td><td>2019–2020 用户视角、需求、信息整合</td></tr><tr><td><code>01-原帖全文/batch-5.md</code></td><td>41–50</td><td>2017–2019 拉新、赚钱思维、早期实操</td></tr><tr><td><code>01-原帖全文/batch-6.md</code></td><td>51–64</td><td>2017–2018 短动态与工具</td></tr><tr><td><code>01-原帖全文/batch-7.md</code></td><td>65–77</td><td>2017 短动态、案例、附件分享</td></tr></tbody></table></div>
+<p><code>00-数据/posts.json</code> 保存 77 篇的 entityId、标题、发帖时间戳、精华标记与互动数据，可用于复查。帖子详情链接格式：<code>https://scys.com/articleDetail/xq_topic/&lt;entityId&gt;</code>。</p>
+<blockquote>已标注为「正文为空」的 <a class="ref" href="#post-57" title="跳转到附录 A 第 57 篇">[57]</a><a class="ref" href="#post-68" title="跳转到附录 A 第 68 篇">[68]</a><a class="ref" href="#post-69" title="跳转到附录 A 第 69 篇">[69]</a> 属于纯链接／纯附件分享帖，无作者自己的文字观点，本手册只记录其存在，不代拟观点。</blockquote>
+<h2 id="附录-D-三条阅读路径">附录 D　三条阅读路径</h2>
+<div class="table-wrap"><table><thead><tr><th>目标</th><th>建议顺序（帖编号）</th></tr></thead><tbody><tr><td><strong>快速吃透这个人</strong></td><td>20（自传）→ 19（写作与赚钱）→ 17（写自己）→ 1（AI 与愿力）→ 5（年终复盘）</td></tr><tr><td><strong>学方法论</strong></td><td>11（系统）→ 15（原理）→ 18（思考）→ 6（破惯性）→ 13（刻意练习）→ 16（正反馈）</td></tr><tr><td><strong>学产品与流量实操</strong></td><td>31（四象限）→ 35（数据挖需求）→ 32（四清单）→ 26（分销网站）→ 37（信息整合）→ 39（借流量）→ 48（分销）</td></tr><tr><td><strong>研究思想演化</strong></td><td>76 / 50 / 41（2017–2019 术）→ 30 / 42（2020 学习观）→ 19 / 26（2021–2024 写作与能力）→ 6 / 7 / 11 / 15（2024 公理）→ 1（2025 AI）</td></tr></tbody></table></div>
+<hr>
+<p><em>本手册为第三方结构化整理，所有观点归属原作者「明白（晚9点半睡觉）」。引用请附原帖链接。整理者所做的归纳、路线与判断已在文中显式标注。</em></p></article>
+</main>
+<button class="topbtn" title="回到顶部">↑</button>
+<script>
+const links=[...document.querySelectorAll('.toc a')];
+const heads=links.map(a=>document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+function onScroll(){
+  const y=window.scrollY+120;
+  let cur=null;
+  heads.forEach(h=>{if(h.offsetTop<=y)cur=h.id});
+  links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));
+  const h=document.documentElement.scrollHeight-window.innerHeight;
+  document.querySelector('.progress i').style.width=(h>0?(window.scrollY/h*100):0)+'%';
+  document.querySelector('.topbtn').style.display=window.scrollY>500?'block':'none';
+}
+window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+document.querySelector('.topbtn').onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
+document.querySelector('.toc-search').addEventListener('input',e=>{
+  const q=e.target.value.trim().toLowerCase();
+  links.forEach(a=>{a.style.display=(!q||a.textContent.toLowerCase().includes(q))?'block':'none'});
+});
+</script>
+</body></html>
